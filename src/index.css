@@ -97,12 +97,12 @@
     --popover: 220 18% 14%;
     --popover-foreground: 210 20% 92%;
 
-    --primary: 24 95% 53%;
+    --primary: 8 70% 58%;
     --primary-foreground: 0 0% 100%;
 
-    --primary-light: 24 90% 62%;
-    --primary-soft: 24 40% 20%;
-    --primary-dark: 24 95% 43%;
+    --primary-light: 8 65% 65%;
+    --primary-soft: 8 40% 16%;
+    --primary-dark: 8 70% 48%;
 
     --expired: 0 60% 55%;
     --expired-foreground: 0 0% 100%;
