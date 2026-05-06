@@ -14,8 +14,8 @@
     --safe-area-right: env(safe-area-inset-right, 0px);
 
     /* Background: soft warm off-white */
-    --background: 8 80% 97%;
-    --foreground: 220 15% 20%;
+    --background: 0 0% 98%;
+    --foreground: 0 0% 0%;
 
     --card: 0 0% 100%;
     --card-foreground: 220 15% 20%;
@@ -50,7 +50,7 @@
 
     /* Muted */
     --muted: 8 30% 93%;
-    --muted-foreground: 220 10% 45%;
+    --muted-foreground: 0 0% 0%;
 
     /* Accent: muted teal — sparing use */
     --accent: 170 45% 45%;

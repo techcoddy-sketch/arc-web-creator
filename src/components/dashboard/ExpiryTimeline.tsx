@@ -93,7 +93,7 @@ export function ExpiryTimeline({ documents }: ExpiryTimelineProps) {
   return (
     <Card className="p-0 overflow-hidden animate-fade-in">
       <div className="px-4 pt-4 pb-2 animate-scale-in">
-        <h2 className="text-lg font-bold">Expiry Timeline</h2>
+        <h2 className="text-lg font-bold text-primary">Expiry Timeline</h2>
         <p className="text-sm text-muted-foreground">Scroll to explore past and upcoming expiries</p>
       </div>
 
