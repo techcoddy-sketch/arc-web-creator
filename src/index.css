@@ -23,13 +23,13 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 15% 20%;
 
-    /* Primary: warm orange */
-    --primary: 24 95% 53%;
+    /* Primary: medium vermilion */
+    --primary: 8 75% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --primary-light: 24 90% 62%;
-    --primary-soft: 24 100% 96%;
-    --primary-dark: 24 95% 43%;
+    --primary-light: 8 70% 60%;
+    --primary-soft: 8 100% 96%;
+    --primary-dark: 8 75% 40%;
 
     /* Status Colors */
     --expired: 0 65% 55%;
