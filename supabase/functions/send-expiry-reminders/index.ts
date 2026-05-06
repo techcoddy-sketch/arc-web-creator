@@ -17,6 +17,17 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Validate cron secret to prevent unauthorized invocation
+  const expectedSecret = Deno.env.get("CRON_SECRET");
+  const providedSecret = req.headers.get("x-cron-secret");
+  if (!expectedSecret || providedSecret !== expectedSecret) {
+    console.error("Unauthorized access attempt to send-expiry-reminders");
+    return new Response(
+      JSON.stringify({ error: "Unauthorized" }),
+      { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+  }
+
   console.log("Starting expiry reminders check...");
 
   const supabase = createClient(supabaseUrl, supabaseServiceKey);
