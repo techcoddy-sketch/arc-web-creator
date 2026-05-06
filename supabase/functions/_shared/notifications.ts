@@ -10,9 +10,11 @@ export async function sendPushNotification(
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), ONESIGNAL_TIMEOUT_MS);
-    
+
+    const cronSecret = Deno.env.get('CRON_SECRET');
     const { error } = await supabase.functions.invoke('send-onesignal-notification', {
       body: payload,
+      headers: cronSecret ? { 'x-cron-secret': cronSecret } : undefined,
     });
     
     clearTimeout(timeoutId);
