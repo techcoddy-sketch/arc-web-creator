@@ -1,6 +1,7 @@
 import { createSupabaseClient } from '../_shared/database.ts';
 import { sendPushNotification, sendEmailNotification } from '../_shared/notifications.ts';
 import { handleCorsOptions, createJsonResponse, createErrorResponse } from '../_shared/cors.ts';
+import { verifyCronSecret } from '../_shared/cronAuth.ts';
 import { convertUtcToLocal, getCurrentLocalTime } from '../_shared/timezone.ts';
 
 /**
@@ -36,6 +37,9 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return handleCorsOptions();
   }
+
+  const auth = verifyCronSecret(req);
+  if (!auth.ok) return auth.response;
 
   try {
     console.log('📄 Document reminder scheduler starting...');

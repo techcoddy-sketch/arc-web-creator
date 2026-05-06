@@ -1,6 +1,7 @@
 import { createSupabaseClient, fetchProfilesWithTimezone } from '../_shared/database.ts';
 import { sendUnifiedNotification } from '../_shared/unified-notifications.ts';
 import { handleCorsOptions, createJsonResponse, createErrorResponse } from '../_shared/cors.ts';
+import { verifyCronSecret } from '../_shared/cronAuth.ts';
 import { getCurrentLocalTime, getDateInTimezone } from '../_shared/timezone.ts';
 import { format, differenceInDays } from 'npm:date-fns@3.6.0';
 
@@ -17,6 +18,9 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return handleCorsOptions();
   }
+
+  const auth = verifyCronSecret(req);
+  if (!auth.ok) return auth.response;
 
   try {
     console.log('🚨 Task overdue alert starting...');

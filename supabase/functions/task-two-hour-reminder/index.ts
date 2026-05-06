@@ -1,6 +1,7 @@
 import { createSupabaseClient, fetchProfilesWithTimezone } from '../_shared/database.ts';
 import { sendUnifiedNotification } from '../_shared/unified-notifications.ts';
 import { handleCorsOptions, createJsonResponse, createErrorResponse } from '../_shared/cors.ts';
+import { verifyCronSecret } from '../_shared/cronAuth.ts';
 import { toZonedTime, fromZonedTime } from 'npm:date-fns-tz@3.2.0';
 import { getFunnyNotification } from '../_shared/funnyNotifications.ts';
 
@@ -31,6 +32,9 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return handleCorsOptions();
   }
+
+  const auth = verifyCronSecret(req);
+  if (!auth.ok) return auth.response;
 
   try {
     console.log('⏰ Task two-hour reminder starting...');

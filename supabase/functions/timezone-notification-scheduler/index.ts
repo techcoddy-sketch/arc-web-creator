@@ -2,6 +2,7 @@ import { createSupabaseClient, fetchProfilesWithTimezone } from '../_shared/data
 import { getCurrentLocalTimeString } from '../_shared/timezone.ts';
 import { sendUnifiedNotification, sendEmailNotification } from '../_shared/notifications.ts';
 import { handleCorsOptions, createJsonResponse, createErrorResponse } from '../_shared/cors.ts';
+import { verifyCronSecret } from '../_shared/cronAuth.ts';
 import { getFunnyNotification } from '../_shared/funnyNotifications.ts';
 import type { Profile } from '../_shared/types.ts';
 
@@ -9,6 +10,9 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return handleCorsOptions();
   }
+
+  const auth = verifyCronSecret(req);
+  if (!auth.ok) return auth.response;
 
   try {
     console.log('🕐 Timezone notification scheduler starting...');
