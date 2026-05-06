@@ -161,7 +161,7 @@ export default function Tasks() {
                 <p className="text-xl font-bold text-foreground">{pendingTasks.length}</p>
               </div>
               <div className="flex-1 bg-valid-bg/50 backdrop-blur-sm rounded-[16px] p-3 border border-valid/30">
-                <p className="text-xs text-valid-foreground mb-1">Completed</p>
+                <p className="text-xs text-black mb-1">Completed</p>
                 <p className="text-xl font-bold text-valid">{completedTasks.length}</p>
               </div>
             </div>
