@@ -2,6 +2,15 @@ import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, AlertTriangle, CheckCircle, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+type StatCard = {
+  key: string;
+  label: string;
+  value: number;
+  icon: React.ComponentType<{ className?: string }>;
+  gradient: string;
+  shadow: string;
+};
+
 export function DocumentStats({ total, expiringSoon, expired, valid }: {
   total: number;
   expiringSoon: number;
@@ -10,103 +19,84 @@ export function DocumentStats({ total, expiringSoon, expired, valid }: {
 }) {
   const navigate = useNavigate();
 
-  const handleCardClick = (status: string) => {
-    navigate(`/documents?status=${status}`);
-  };
+  const cards: StatCard[] = [
+    {
+      key: "all",
+      label: "Total Documents",
+      value: total,
+      icon: FileText,
+      gradient: "linear-gradient(135deg, #818CF8 0%, #6366F1 100%)",
+      shadow: "0 10px 30px -8px rgba(99,102,241,0.45)",
+    },
+    {
+      key: "valid",
+      label: "Valid",
+      value: valid,
+      icon: CheckCircle,
+      gradient: "linear-gradient(135deg, #4ADE80 0%, #22C55E 100%)",
+      shadow: "0 10px 30px -8px rgba(34,197,94,0.45)",
+    },
+    {
+      key: "expiring",
+      label: "Expiring Soon",
+      value: expiringSoon,
+      icon: Clock,
+      gradient: "linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%)",
+      shadow: "0 10px 30px -8px rgba(245,158,11,0.45)",
+    },
+    {
+      key: "expired",
+      label: "Expired",
+      value: expired,
+      icon: AlertTriangle,
+      gradient: "linear-gradient(135deg, #FB7185 0%, #EF4444 100%)",
+      shadow: "0 10px 30px -8px rgba(239,68,68,0.45)",
+    },
+  ];
 
   return (
-    <div className="grid grid-cols-2 gap-3">
-      <div
-        className="cursor-pointer rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.02]"
-        onClick={() => handleCardClick('all')}
-        style={{
-          background: "linear-gradient(135deg, #b5a99a 0%, #8c7d6e 100%)",
-          backdropFilter: "blur(16px) saturate(180%)",
-          WebkitBackdropFilter: "blur(16px) saturate(180%)",
-          border: "1px solid rgba(255,255,255,0.25)",
-          boxShadow: "0 8px 32px rgba(140,125,110,0.30), inset 0 1px 0 rgba(255,255,255,0.20)",
-          borderRadius: "1rem",
-        }}
-      >
-        <CardHeader className="pb-2">
-          <CardTitle className="text-base font-semibold flex items-center gap-2">
-            <FileText className="h-5 w-5 text-primary" />
-            Total Documents
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold text-black">{total}</div>
-        </CardContent>
-      </div>
+    <div className="grid grid-cols-2 gap-4">
+      {cards.map(({ key, label, value, icon: Icon, gradient, shadow }) => (
+        <div
+          key={key}
+          onClick={() => navigate(`/documents?status=${key}`)}
+          className="group relative cursor-pointer overflow-hidden rounded-[22px] p-5 transition-all duration-300 ease-out hover:-translate-y-1 hover:brightness-105"
+          style={{
+            background: gradient,
+            boxShadow: shadow,
+          }}
+        >
+          {/* Glassy highlight overlay */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-[22px] opacity-90"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 55%)",
+            }}
+          />
+          {/* Soft inner light */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full blur-2xl opacity-40"
+            style={{ background: "rgba(255,255,255,0.55)" }}
+          />
 
-      <div
-        className="cursor-pointer rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.02]"
-        onClick={() => handleCardClick('valid')}
-        style={{
-          background: "linear-gradient(135deg, #6abf7b 0%, #3a9e52 100%)",
-          backdropFilter: "blur(16px) saturate(180%)",
-          WebkitBackdropFilter: "blur(16px) saturate(180%)",
-          border: "1px solid rgba(255,255,255,0.25)",
-          boxShadow: "0 8px 32px rgba(58,158,82,0.30), inset 0 1px 0 rgba(255,255,255,0.20)",
-          borderRadius: "1rem",
-        }}
-      >
-        <CardHeader className="pb-2">
-          <CardTitle className="text-base font-semibold flex items-center gap-2">
-            <CheckCircle className="h-5 w-5 text-black" />
-            Valid
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold text-black">{valid}</div>
-        </CardContent>
-      </div>
-
-      <div
-        className="cursor-pointer rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.02]"
-        onClick={() => handleCardClick('expiring')}
-        style={{
-          background: "linear-gradient(135deg, #d4b84a 0%, #b8962e 100%)",
-          backdropFilter: "blur(16px) saturate(180%)",
-          WebkitBackdropFilter: "blur(16px) saturate(180%)",
-          border: "1px solid rgba(255,255,255,0.25)",
-          boxShadow: "0 8px 32px rgba(184,150,46,0.30), inset 0 1px 0 rgba(255,255,255,0.20)",
-          borderRadius: "1rem",
-        }}
-      >
-        <CardHeader className="pb-2">
-          <CardTitle className="text-base font-semibold flex items-center gap-2">
-            <Clock className="h-5 w-5 text-black" />
-            Expiring Soon
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold text-black">{expiringSoon}</div>
-        </CardContent>
-      </div>
-
-      <div
-        className="cursor-pointer rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.02]"
-        onClick={() => handleCardClick('expired')}
-        style={{
-          background: "linear-gradient(135deg, #e07070 0%, #c0404a 100%)",
-          backdropFilter: "blur(16px) saturate(180%)",
-          WebkitBackdropFilter: "blur(16px) saturate(180%)",
-          border: "1px solid rgba(255,255,255,0.25)",
-          boxShadow: "0 8px 32px rgba(192,64,74,0.30), inset 0 1px 0 rgba(255,255,255,0.20)",
-          borderRadius: "1rem",
-        }}
-      >
-        <CardHeader className="pb-2">
-          <CardTitle className="text-base font-semibold flex items-center gap-2">
-            <AlertTriangle className="h-5 w-5 text-black" />
-            Expired
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold text-black">{expired}</div>
-        </CardContent>
-      </div>
+          <CardHeader className="relative p-0 pb-3">
+            <CardTitle className="text-sm font-semibold flex items-center gap-2 text-white/95 tracking-wide">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm ring-1 ring-white/30">
+                <Icon className="h-4 w-4 text-white" />
+              </span>
+              {label}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="relative p-0">
+            <div className="text-3xl font-bold text-white drop-shadow-sm tracking-tight">
+              {value}
+            </div>
+          </CardContent>
+        </div>
+      ))}
     </div>
   );
 }
