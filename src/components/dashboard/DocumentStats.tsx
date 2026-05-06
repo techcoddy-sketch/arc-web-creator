@@ -33,8 +33,8 @@ export function DocumentStats({ total, expiringSoon, expired, valid }: {
       label: "Valid",
       value: valid,
       icon: CheckCircle,
-      gradient: "linear-gradient(135deg, #4ADE80 0%, #22C55E 100%)",
-      shadow: "0 10px 30px -8px rgba(34,197,94,0.45)",
+      gradient: "linear-gradient(135deg, #2D8A5A 0%, #1F6B43 100%)",
+      shadow: "0 10px 30px -8px rgba(31,107,67,0.45)",
     },
     {
       key: "expiring",
