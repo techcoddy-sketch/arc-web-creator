@@ -252,7 +252,7 @@
     pointer-events: none;
   }
   .btn-glow:hover {
-    box-shadow: 0 6px 20px rgba(249, 115, 22, 0.45), 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 20px rgba(217, 79, 53, 0.45), 0 2px 4px rgba(0, 0, 0, 0.1);
     transform: translateY(-1px) scale(1.01);
   }
   .btn-glow:active {
