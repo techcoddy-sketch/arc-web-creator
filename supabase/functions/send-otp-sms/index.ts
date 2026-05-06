@@ -21,9 +21,42 @@ const handler = async (req: Request): Promise<Response> => {
 
     const normalizedPhone = phone_number.replace(/[\s\-()]/g, "");
 
+    // Basic phone format validation (E.164-ish: digits, optional +, 8-16 chars)
+    if (!/^\+?[0-9]{8,16}$/.test(normalizedPhone)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid phone number format" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // IP-based rate limiting to mitigate OTP-bombing across many target numbers.
+    // Limit any single source IP to 10 OTP dispatch attempts per hour.
+    const sourceIp =
+      req.headers.get("cf-connecting-ip") ||
+      req.headers.get("x-real-ip") ||
+      (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() ||
+      "unknown";
+
+    const oneHourAgoIso = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+    if (sourceIp && sourceIp !== "unknown") {
+      const { count: ipCount } = await supabase
+        .from("otp_codes")
+        .select("id", { count: "exact", head: true })
+        .eq("ip_address", sourceIp)
+        .gte("created_at", oneHourAgoIso);
+
+      if ((ipCount ?? 0) >= 10) {
+        console.log("IP rate limit exceeded:", sourceIp);
+        return new Response(
+          JSON.stringify({ error: "Too many OTP requests from this network. Please try again later." }),
+          { status: 429, headers: { "Content-Type": "application/json", ...corsHeaders } }
+        );
+      }
+    }
 
     // Check for rate limiting - max 3 OTPs per phone per hour
     const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
@@ -84,6 +117,7 @@ const handler = async (req: Request): Promise<Response> => {
         is_verified: false,
         last_otp_sent_at: now,
         failed_attempts: 0,
+        ip_address: sourceIp,
       });
 
     if (dbError) {
