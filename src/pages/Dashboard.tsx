@@ -208,8 +208,8 @@ export default function Dashboard() {
                         >
                           <div className="flex items-center justify-between">
                             <div className="flex-1">
-                              <h3 className={`font-semibold mb-1 ${statusInfo.textClass}`}>{doc.name}</h3>
-                              <p className="text-sm text-muted-foreground capitalize">
+                              <h3 className="font-semibold mb-1 text-black">{doc.name}</h3>
+                              <p className="text-sm text-black/70 capitalize">
                                 {isDocVault
                                   ? `Added ${new Date(doc.created_at).toLocaleDateString()}`
                                   : `${doc.document_type.replace('_', ' ')} • Expires ${new Date(doc.expiry_date).toLocaleDateString()}`}
