@@ -19,7 +19,14 @@ export function DocumentStats({ total, expiringSoon, expired, valid }: {
       <div
         className="cursor-pointer rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.02]"
         onClick={() => handleCardClick('all')}
-        style={{ background: "linear-gradient(145deg, hsl(30 25% 88%), hsl(30 20% 82%), hsl(0 0% 78%))" }}
+        style={{
+          background: "linear-gradient(135deg, #b5a99a 0%, #8c7d6e 100%)",
+          backdropFilter: "blur(16px) saturate(180%)",
+          WebkitBackdropFilter: "blur(16px) saturate(180%)",
+          border: "1px solid rgba(255,255,255,0.25)",
+          boxShadow: "0 8px 32px rgba(140,125,110,0.30), inset 0 1px 0 rgba(255,255,255,0.20)",
+          borderRadius: "1rem",
+        }}
       >
         <CardHeader className="pb-2">
           <CardTitle className="text-base font-semibold flex items-center gap-2">
@@ -35,7 +42,14 @@ export function DocumentStats({ total, expiringSoon, expired, valid }: {
       <div
         className="cursor-pointer rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.02]"
         onClick={() => handleCardClick('valid')}
-        style={{ background: "linear-gradient(145deg, hsl(115 45% 78%), hsl(120 40% 72%), hsl(115 35% 66%))" }}
+        style={{
+          background: "linear-gradient(135deg, #6abf7b 0%, #3a9e52 100%)",
+          backdropFilter: "blur(16px) saturate(180%)",
+          WebkitBackdropFilter: "blur(16px) saturate(180%)",
+          border: "1px solid rgba(255,255,255,0.25)",
+          boxShadow: "0 8px 32px rgba(58,158,82,0.30), inset 0 1px 0 rgba(255,255,255,0.20)",
+          borderRadius: "1rem",
+        }}
       >
         <CardHeader className="pb-2">
           <CardTitle className="text-base font-semibold flex items-center gap-2">
@@ -51,7 +65,14 @@ export function DocumentStats({ total, expiringSoon, expired, valid }: {
       <div
         className="cursor-pointer rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.02]"
         onClick={() => handleCardClick('expiring')}
-        style={{ background: "linear-gradient(145deg, hsl(48 80% 78%), hsl(45 75% 70%), hsl(48 60% 62%))" }}
+        style={{
+          background: "linear-gradient(135deg, #d4b84a 0%, #b8962e 100%)",
+          backdropFilter: "blur(16px) saturate(180%)",
+          WebkitBackdropFilter: "blur(16px) saturate(180%)",
+          border: "1px solid rgba(255,255,255,0.25)",
+          boxShadow: "0 8px 32px rgba(184,150,46,0.30), inset 0 1px 0 rgba(255,255,255,0.20)",
+          borderRadius: "1rem",
+        }}
       >
         <CardHeader className="pb-2">
           <CardTitle className="text-base font-semibold flex items-center gap-2">
@@ -67,7 +88,14 @@ export function DocumentStats({ total, expiringSoon, expired, valid }: {
       <div
         className="cursor-pointer rounded-2xl shadow-sm transition-transform duration-200 hover:scale-[1.02]"
         onClick={() => handleCardClick('expired')}
-        style={{ background: "linear-gradient(145deg, hsl(0 70% 82%), hsl(0 60% 74%), hsl(0 50% 66%))" }}
+        style={{
+          background: "linear-gradient(135deg, #e07070 0%, #c0404a 100%)",
+          backdropFilter: "blur(16px) saturate(180%)",
+          WebkitBackdropFilter: "blur(16px) saturate(180%)",
+          border: "1px solid rgba(255,255,255,0.25)",
+          boxShadow: "0 8px 32px rgba(192,64,74,0.30), inset 0 1px 0 rgba(255,255,255,0.20)",
+          borderRadius: "1rem",
+        }}
       >
         <CardHeader className="pb-2">
           <CardTitle className="text-base font-semibold flex items-center gap-2">
