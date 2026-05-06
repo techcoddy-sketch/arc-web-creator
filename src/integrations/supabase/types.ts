@@ -333,6 +333,7 @@ export type Database = {
           expires_at: string
           failed_attempts: number | null
           id: string
+          ip_address: string | null
           is_verified: boolean | null
           last_otp_sent_at: string | null
           locked_until: string | null
@@ -345,6 +346,7 @@ export type Database = {
           expires_at: string
           failed_attempts?: number | null
           id?: string
+          ip_address?: string | null
           is_verified?: boolean | null
           last_otp_sent_at?: string | null
           locked_until?: string | null
@@ -357,6 +359,7 @@ export type Database = {
           expires_at?: string
           failed_attempts?: number | null
           id?: string
+          ip_address?: string | null
           is_verified?: boolean | null
           last_otp_sent_at?: string | null
           locked_until?: string | null

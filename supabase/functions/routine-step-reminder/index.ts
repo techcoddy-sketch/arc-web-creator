@@ -1,6 +1,7 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { sendUnifiedNotification } from '../_shared/unified-notifications.ts';
 import { handleCorsOptions, createJsonResponse, createErrorResponse } from '../_shared/cors.ts';
+import { verifyCronSecret } from '../_shared/cronAuth.ts';
 import { toZonedTime } from 'npm:date-fns-tz@3.2.0';
 
 /**
@@ -41,6 +42,9 @@ function buildMessage(templates: { title: string; message: string }[], taskName:
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return handleCorsOptions();
+
+  const auth = verifyCronSecret(req);
+  if (!auth.ok) return auth.response;
 
   try {
     console.log('🔔 Routine task slot reminder starting...');
