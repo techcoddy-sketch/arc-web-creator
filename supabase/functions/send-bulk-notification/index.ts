@@ -1,10 +1,17 @@
 import { createSupabaseClient } from '../_shared/database.ts';
 import { handleCorsOptions, createJsonResponse, createErrorResponse } from '../_shared/cors.ts';
+import { verifyCronSecret } from '../_shared/cronAuth.ts';
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return handleCorsOptions();
   }
+
+  // Restrict to server-side scheduler invocation only.
+  // This function uses the service role and emails ALL users — it must
+  // never be callable by an end user, even an authenticated one.
+  const auth = verifyCronSecret(req);
+  if (!auth.ok) return auth.response;
 
   try {
     console.log('📧 Starting bulk notification send...');
