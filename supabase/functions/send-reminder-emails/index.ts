@@ -260,7 +260,8 @@ const handler = async (req: Request): Promise<Response> => {
                   type: 'expiry_reminder',
                   expiryDate: document.expiry_date
                 }
-              }
+              },
+              headers: expectedSecret ? { 'x-cron-secret': expectedSecret } : undefined,
             });
             
             if (pushResponse.error) {
