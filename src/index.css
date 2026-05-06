@@ -67,23 +67,23 @@
     /* Borders */
     --border: 210 15% 88%;
     --input: 210 15% 90%;
-    --ring: 24 95% 53%;
+    --ring: 8 75% 50%;
 
     --radius: 1rem;
 
     /* Card shadow */
-    --card-shadow: 0 2px 16px rgba(249, 115, 22, 0.08);
-    --card-shadow-hover: 0 8px 30px rgba(249, 115, 22, 0.14);
+    --card-shadow: 0 2px 16px rgba(217, 79, 53, 0.08);
+    --card-shadow-hover: 0 8px 30px rgba(217, 79, 53, 0.14);
 
     /* Sidebar */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 220 15% 20%;
-    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary: 8 75% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 40% 96%;
     --sidebar-accent-foreground: 210 40% 35%;
     --sidebar-border: 210 15% 88%;
-    --sidebar-ring: 24 95% 53%;
+    --sidebar-ring: 8 75% 50%;
   }
 
   .dark {
