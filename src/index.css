@@ -257,7 +257,7 @@
   }
   .btn-glow:active {
     transform: translateY(0px) scale(0.98);
-    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.20);
+    box-shadow: 0 2px 8px rgba(217, 79, 53, 0.20);
   }
 
   /* Page background */
