@@ -83,15 +83,15 @@ export function DocumentStats({ total, expiringSoon, expired, valid }: {
           />
 
           <CardHeader className="relative p-0 pb-3">
-            <CardTitle className="text-sm font-semibold flex items-center gap-2 text-white/95 tracking-wide">
+            <CardTitle className="text-sm font-semibold flex items-center gap-2 text-black tracking-wide">
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm ring-1 ring-white/30">
-                <Icon className="h-4 w-4 text-white" />
+                <Icon className="h-4 w-4 text-black" />
               </span>
               {label}
             </CardTitle>
           </CardHeader>
           <CardContent className="relative p-0">
-            <div className="text-3xl font-bold text-white drop-shadow-sm tracking-tight">
+            <div className="text-3xl font-bold text-black drop-shadow-sm tracking-tight">
               {value}
             </div>
           </CardContent>
