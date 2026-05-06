@@ -133,19 +133,19 @@
 
     --border: 220 15% 22%;
     --input: 220 15% 20%;
-    --ring: 24 95% 53%;
+    --ring: 8 70% 58%;
 
-    --card-shadow: 0 2px 16px rgba(249, 115, 22, 0.08);
-    --card-shadow-hover: 0 8px 30px rgba(249, 115, 22, 0.14);
+    --card-shadow: 0 2px 16px rgba(217, 79, 53, 0.08);
+    --card-shadow-hover: 0 8px 30px rgba(217, 79, 53, 0.14);
 
     --sidebar-background: 220 22% 12%;
     --sidebar-foreground: 210 20% 90%;
-    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary: 8 70% 58%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 30% 20%;
     --sidebar-accent-foreground: 210 40% 75%;
     --sidebar-border: 220 15% 20%;
-    --sidebar-ring: 24 95% 53%;
+    --sidebar-ring: 8 70% 58%;
   }
 
   html {
