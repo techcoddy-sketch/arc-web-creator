@@ -414,7 +414,7 @@ export default function DocVault() {
                     startCamera();
                   }}
                   variant="outline"
-                  className="gap-2"
+                  className="gap-2 text-black"
                 >
                   <CameraIcon className="h-4 w-4" />
                   Scan
