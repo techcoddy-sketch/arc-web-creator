@@ -82,6 +82,7 @@ Deno.serve(async (req) => {
             `• ${t.title} (${t.consecutive_missed_days} day${t.consecutive_missed_days > 1 ? 's' : ''})`
           ).join('\n');
 
+          const { getReminderButtons } = await import('../_shared/notificationActions.ts');
           const sent = await sendUnifiedNotification(supabase, {
             userId: profile.user_id,
             title: funnyAlert.title,
@@ -90,6 +91,7 @@ Deno.serve(async (req) => {
               type: 'task_incomplete_urgent',
               task_count: urgentTasks.length.toString(),
             },
+            buttons: getReminderButtons('task_bulk'),
           });
 
           if (sent) {
@@ -102,6 +104,7 @@ Deno.serve(async (req) => {
             taskCount: normalOverdue.length,
           });
 
+          const { getReminderButtons } = await import('../_shared/notificationActions.ts');
           const sent = await sendUnifiedNotification(supabase, {
             userId: profile.user_id,
             title: funnyReminder.title,
@@ -110,6 +113,7 @@ Deno.serve(async (req) => {
               type: 'task_incomplete_reminder',
               task_count: normalOverdue.length.toString(),
             },
+            buttons: getReminderButtons('task_bulk'),
           });
 
           if (sent) {
