@@ -311,6 +311,21 @@ export default function Auth() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          <QuickAuth />
+
+          <div className="my-6 flex items-center gap-3">
+            <div className="h-px flex-1 bg-border" />
+            <button
+              type="button"
+              onClick={() => setShowPasswordAuth((v) => !v)}
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {showPasswordAuth ? "Hide password sign-in" : "Use email & password instead"}
+            </button>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+
+          {showPasswordAuth && (
           <Tabs defaultValue="signin" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="signin">Sign In</TabsTrigger>
