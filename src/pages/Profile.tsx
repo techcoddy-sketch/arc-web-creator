@@ -394,7 +394,7 @@ export default function Profile() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">Build</span>
-                    <span className="text-sm font-medium">2025.01</span>
+                    <span className="text-sm font-medium text-foreground">2025.01</span>
                   </div>
                   <div className="pt-4 border-t">
                     <p className="text-sm text-muted-foreground">
