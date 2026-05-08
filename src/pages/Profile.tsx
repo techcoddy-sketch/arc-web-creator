@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { ChevronRight, Download, User, LogOut, HelpCircle, MessageSquare, Info, Mail, FileCheck, Bell } from "lucide-react";
+import { ChevronRight, Download, User, LogOut, HelpCircle, MessageSquare, Info, Mail, FileCheck, Bell, Palette } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { BottomNavigation } from "@/components/layout/BottomNavigation";
 import { SafeAreaContainer } from "@/components/layout/SafeAreaContainer";
@@ -13,6 +13,7 @@ import { exportToCSV, exportToJSON } from "@/utils/exportData";
 import { getSignedUrl } from "@/utils/signedUrl";
 import { AvatarEditPopover } from "@/components/profile/AvatarEditPopover";
 import { EditProfileSheet } from "@/components/profile/EditProfileSheet";
+import { cn } from "@/lib/utils";
 import { ThemePicker } from "@/components/settings/ThemePicker";
 
 
@@ -80,6 +81,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [avatarSignedUrl, setAvatarSignedUrl] = useState<string | null>(null);
   const [editProfileOpen, setEditProfileOpen] = useState(false);
+  const [appearanceOpen, setAppearanceOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -262,10 +264,31 @@ export default function Profile() {
             <SettingsItem icon={Bell} title="Notification Settings" to="/notification-sound-settings" />
           </SettingsSection>
 
-          {/* Appearance / Theme */}
-          <div className="mb-6">
-            <ThemePicker />
-          </div>
+          {/* Appearance / Theme - Collapsible */}
+          <SettingsSection title="Appearance">
+            <button 
+              onClick={() => setAppearanceOpen(!appearanceOpen)} 
+              className="w-full text-left border-b border-border/50 last:border-0"
+            >
+              <div className="flex items-center justify-between p-4 hover:bg-accent/5 smooth cursor-pointer group">
+                <div className="flex items-center gap-3">
+                  <Palette className="h-5 w-5 text-muted-foreground" />
+                  <span className="text-foreground font-medium">Customize Theme</span>
+                </div>
+                <ChevronRight 
+                  className={cn(
+                    "h-5 w-5 text-muted-foreground smooth",
+                    appearanceOpen ? "rotate-90" : "group-hover:translate-x-1"
+                  )} 
+                />
+              </div>
+            </button>
+            {appearanceOpen && (
+              <div className="px-4 pb-4 animate-fade-in">
+                <ThemePicker />
+              </div>
+            )}
+          </SettingsSection>
 
           {/* Support Section */}
           <SettingsSection title="Support">
