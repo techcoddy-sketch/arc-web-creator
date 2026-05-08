@@ -10,7 +10,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { userId, title, message, data }: NotificationPayload = await req.json();
+    const { userId, title, message, data, buttons, url }: NotificationPayload = await req.json();
     
     if (!userId || !title || !message) {
       return createErrorResponse('Missing required fields: userId, title, message', 400);
@@ -65,13 +65,19 @@ Deno.serve(async (req) => {
       throw new Error('OneSignal credentials not configured');
     }
 
-    const payload = {
+    const payload: Record<string, unknown> = {
       app_id: oneSignalAppId,
       include_player_ids: playerIds,
       headings: { en: sanitizedTitle },
       contents: { en: sanitizedMessage },
       data: data || {},
     };
+
+    if (buttons && buttons.length > 0) {
+      payload.buttons = buttons;
+      payload.ios_category = 'REMINDER_ACTIONS';
+    }
+    if (url) payload.url = url;
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000);

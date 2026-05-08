@@ -73,6 +73,7 @@ Deno.serve(async (req) => {
             
             const message = funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
 
+            const { getReminderButtons } = await import('../_shared/notificationActions.ts');
             const sent = await sendUnifiedNotification(supabase, {
               userId: profile.user_id,
               title: '⚠️ Task Overdue Alert',
@@ -80,8 +81,11 @@ Deno.serve(async (req) => {
               data: { 
                 type: 'task_overdue', 
                 task_id: task.id,
-                days_overdue: task.consecutive_missed_days.toString()
+                days_overdue: task.consecutive_missed_days.toString(),
+                entity_type: 'task',
+                entity_id: task.id,
               },
+              buttons: getReminderButtons('task'),
             });
 
             if (sent) {
