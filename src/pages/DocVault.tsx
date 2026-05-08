@@ -463,7 +463,7 @@ export default function DocVault() {
                   <div className="flex flex-col sm:flex-row gap-2 justify-center max-w-sm mx-auto">
                     <Button 
                       variant="outline" 
-                      className="w-full sm:w-auto"
+                      className="w-full sm:w-auto text-black"
                       onClick={() => {
                         setUploadCategoryId(selectedCategory);
                         startCamera();
