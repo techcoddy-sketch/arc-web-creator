@@ -262,6 +262,11 @@ export default function Profile() {
             <SettingsItem icon={Bell} title="Notification Settings" to="/notification-sound-settings" />
           </SettingsSection>
 
+          {/* Appearance / Theme */}
+          <div className="mb-6">
+            <ThemePicker />
+          </div>
+
           {/* Support Section */}
           <SettingsSection title="Support">
             <Dialog>
