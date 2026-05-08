@@ -365,7 +365,7 @@ export default function Profile() {
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium mb-2">Response Time</p>
+                    <p className="text-sm font-medium mb-2 text-foreground">Response Time</p>
                     <p className="text-sm text-muted-foreground">
                       We typically respond within 24-48 hours
                     </p>
