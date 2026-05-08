@@ -390,7 +390,7 @@ export default function Profile() {
                 <div className="pt-4 space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">Version</span>
-                    <span className="text-sm font-medium">1.0.0</span>
+                    <span className="text-sm font-medium text-foreground">1.0.0</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">Build</span>
