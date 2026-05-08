@@ -13,6 +13,7 @@ import { exportToCSV, exportToJSON } from "@/utils/exportData";
 import { getSignedUrl } from "@/utils/signedUrl";
 import { AvatarEditPopover } from "@/components/profile/AvatarEditPopover";
 import { EditProfileSheet } from "@/components/profile/EditProfileSheet";
+import { ThemePicker } from "@/components/settings/ThemePicker";
 
 
 interface Profile {
@@ -260,6 +261,11 @@ export default function Profile() {
           <SettingsSection title="Notifications">
             <SettingsItem icon={Bell} title="Notification Settings" to="/notification-sound-settings" />
           </SettingsSection>
+
+          {/* Appearance / Theme */}
+          <div className="mb-6">
+            <ThemePicker />
+          </div>
 
           {/* Support Section */}
           <SettingsSection title="Support">
