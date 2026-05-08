@@ -16,6 +16,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { InternationalPhoneInput } from "@/components/ui/international-phone-input";
 import { getCountryCode } from "@/utils/countryMapping";
+import { QuickAuth } from "@/components/auth/QuickAuth";
 
 const signInSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -67,6 +68,7 @@ export default function Auth() {
   const [signupOtpVerified, setSignupOtpVerified] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [termsDialogOpen, setTermsDialogOpen] = useState(false);
+  const [showPasswordAuth, setShowPasswordAuth] = useState(false);
   
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -309,6 +311,21 @@ export default function Auth() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          <QuickAuth />
+
+          <div className="my-6 flex items-center gap-3">
+            <div className="h-px flex-1 bg-border" />
+            <button
+              type="button"
+              onClick={() => setShowPasswordAuth((v) => !v)}
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {showPasswordAuth ? "Hide password sign-in" : "Use email & password instead"}
+            </button>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+
+          {showPasswordAuth && (
           <Tabs defaultValue="signin" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="signin">Sign In</TabsTrigger>
@@ -531,6 +548,7 @@ export default function Auth() {
               )}
             </TabsContent>
           </Tabs>
+          )}
         </CardContent>
       </Card>
 
