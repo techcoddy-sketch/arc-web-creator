@@ -429,6 +429,63 @@ export type Database = {
         }
         Relationships: []
       }
+      reminder_instances: {
+        Row: {
+          client_event_at: string | null
+          completed_at: string | null
+          created_at: string
+          device_origin: string | null
+          fired_at: string | null
+          id: string
+          metadata: Json
+          reminder_id: string
+          reminder_type: string
+          scheduled_for: string
+          snooze_count: number
+          snoozed_until: string | null
+          state: string
+          timezone: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          client_event_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          device_origin?: string | null
+          fired_at?: string | null
+          id?: string
+          metadata?: Json
+          reminder_id: string
+          reminder_type: string
+          scheduled_for: string
+          snooze_count?: number
+          snoozed_until?: string | null
+          state?: string
+          timezone?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          client_event_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          device_origin?: string | null
+          fired_at?: string | null
+          id?: string
+          metadata?: Json
+          reminder_id?: string
+          reminder_type?: string
+          scheduled_for?: string
+          snooze_count?: number
+          snoozed_until?: string | null
+          state?: string
+          timezone?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       reminders: {
         Row: {
           created_at: string
@@ -584,6 +641,72 @@ export type Database = {
           is_active?: boolean | null
           name?: string
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      snooze_sync_queue: {
+        Row: {
+          action: string
+          client_event_at: string
+          created_at: string
+          id: string
+          instance_id: string | null
+          payload: Json
+          processed: boolean
+          processed_at: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          client_event_at: string
+          created_at?: string
+          id?: string
+          instance_id?: string | null
+          payload?: Json
+          processed?: boolean
+          processed_at?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          client_event_at?: string
+          created_at?: string
+          id?: string
+          instance_id?: string | null
+          payload?: Json
+          processed?: boolean
+          processed_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      snooze_usage: {
+        Row: {
+          created_at: string
+          duration_minutes: number
+          id: string
+          last_used_at: string
+          updated_at: string
+          used_count: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration_minutes: number
+          id?: string
+          last_used_at?: string
+          updated_at?: string
+          used_count?: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          duration_minutes?: number
+          id?: string
+          last_used_at?: string
+          updated_at?: string
+          used_count?: number
           user_id?: string
         }
         Relationships: []
