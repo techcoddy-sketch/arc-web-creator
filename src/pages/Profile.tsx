@@ -353,7 +353,7 @@ export default function Profile() {
                 </DialogHeader>
                 <div className="pt-4 space-y-4">
                   <div>
-                    <p className="text-sm font-medium mb-2">Email Support</p>
+                    <p className="text-sm font-medium mb-2 text-foreground">Email Support</p>
                     <a href="mailto:remind659@gmail.com" className="text-sm text-primary hover:underline">
                       remind659@gmail.com
                     </a>
