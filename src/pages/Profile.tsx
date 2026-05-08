@@ -263,10 +263,31 @@ export default function Profile() {
             <SettingsItem icon={Bell} title="Notification Settings" to="/notification-sound-settings" />
           </SettingsSection>
 
-          {/* Appearance / Theme */}
-          <div className="mb-6">
-            <ThemePicker />
-          </div>
+          {/* Appearance / Theme - Collapsible */}
+          <SettingsSection title="Appearance">
+            <button 
+              onClick={() => setAppearanceOpen(!appearanceOpen)} 
+              className="w-full text-left border-b border-border/50 last:border-0"
+            >
+              <div className="flex items-center justify-between p-4 hover:bg-accent/5 smooth cursor-pointer group">
+                <div className="flex items-center gap-3">
+                  <Palette className="h-5 w-5 text-muted-foreground" />
+                  <span className="text-foreground font-medium">Customize Theme</span>
+                </div>
+                <ChevronRight 
+                  className={cn(
+                    "h-5 w-5 text-muted-foreground smooth",
+                    appearanceOpen ? "rotate-90" : "group-hover:translate-x-1"
+                  )} 
+                />
+              </div>
+            </button>
+            {appearanceOpen && (
+              <div className="px-4 pb-4 animate-fade-in">
+                <ThemePicker />
+              </div>
+            )}
+          </SettingsSection>
 
           {/* Support Section */}
           <SettingsSection title="Support">
