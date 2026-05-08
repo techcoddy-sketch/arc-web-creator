@@ -283,7 +283,7 @@ export default function Documents() {
           {/* Categories */}
           {documents.length > 0 && showCategories && (
             <div className="mb-6">
-              <h2 className="text-lg font-semibold text-primary mb-4">Browse by Category</h2>
+              <h2 className="text-lg font-semibold text-foreground mb-4">Browse by Category</h2>
               <div className="grid grid-cols-1 gap-3">
                 {categories.map((category) => {
                   const count = getCategoryCount(category.id);

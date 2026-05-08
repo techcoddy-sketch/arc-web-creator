@@ -39,7 +39,6 @@ const TaskDetail = lazy(() => import("./pages/TaskDetail"));
 const Settings = lazy(() => import("./pages/Settings"));
 const NotificationSoundSettings = lazy(() => import("./pages/NotificationSoundSettings"));
 const HelpCenter = lazy(() => import("./pages/HelpCenter"));
-const SnoozeRoute = lazy(() => import("./pages/SnoozeRoute"));
 
 // Lazy-load heavy components that aren't needed at startup
 const ChatBot = lazy(() => import("./components/chatbot/ChatBot").then(m => ({ default: m.ChatBot })));
@@ -92,10 +91,6 @@ async function initializeBackground() {
       // Initialize OneSignal
       const { initOneSignal } = await import("@/lib/onesignal");
       initOneSignal();
-
-      // Mirror auth session to native Preferences for the snooze dialog bridge
-      const { initSnoozeBridge } = await import("@/lib/snoozeBridge");
-      initSnoozeBridge();
 
       // Request permissions (non-blocking)
       const { Camera } = await import("@capacitor/camera");
@@ -205,7 +200,6 @@ const App = () => (
                 <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
                 <Route path="/test-emails" element={<ProtectedRoute><TestEmails /></ProtectedRoute>} />
                 <Route path="/test-onesignal" element={<ProtectedRoute><TestOneSignal /></ProtectedRoute>} />
-                <Route path="/snooze/:instanceId" element={<ProtectedRoute><SnoozeRoute /></ProtectedRoute>} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
