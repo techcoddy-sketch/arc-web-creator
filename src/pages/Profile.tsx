@@ -304,7 +304,7 @@ export default function Profile() {
                 </DialogHeader>
                 <div className="pt-4 space-y-4">
                   <div>
-                    <h3 className="font-semibold mb-2">How to scan documents?</h3>
+                    <h3 className="font-semibold mb-2 text-foreground">How to scan documents?</h3>
                     <p className="text-sm text-muted-foreground">
                       Tap the Scan button, allow camera access, and position your document within the frame. The app will automatically detect and capture it.
                     </p>
