@@ -80,6 +80,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [avatarSignedUrl, setAvatarSignedUrl] = useState<string | null>(null);
   const [editProfileOpen, setEditProfileOpen] = useState(false);
+  const [appearanceOpen, setAppearanceOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
