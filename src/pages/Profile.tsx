@@ -359,7 +359,7 @@ export default function Profile() {
                     </a>
                   </div>
                   <div>
-                    <p className="text-sm font-medium mb-2">Business Hours</p>
+                    <p className="text-sm font-medium mb-2 text-foreground">Business Hours</p>
                     <p className="text-sm text-muted-foreground">
                       Monday - Friday: 9:00 AM - 6:00 PM
                     </p>
