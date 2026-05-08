@@ -35,13 +35,13 @@ export function ThemePicker() {
                   type="button"
                   variant={active ? "default" : "outline"}
                   className={cn(
-                    "h-auto py-3 flex-col gap-1.5 smooth",
+                    "h-auto py-3 flex-col gap-1.5 smooth text-foreground hover:text-foreground",
                     active && "ring-2 ring-ring ring-offset-2 ring-offset-background",
                   )}
                   onClick={() => setModePreference(value)}
                 >
-                  <Icon className="h-4 w-4" />
-                  <span className="text-xs font-medium">{label}</span>
+                  <Icon className="h-4 w-4 text-foreground" />
+                  <span className="text-xs font-medium text-foreground">{label}</span>
                 </Button>
               );
             })}
