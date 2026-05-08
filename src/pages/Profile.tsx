@@ -304,19 +304,19 @@ export default function Profile() {
                 </DialogHeader>
                 <div className="pt-4 space-y-4">
                   <div>
-                    <h3 className="font-semibold mb-2">How to scan documents?</h3>
+                    <h3 className="font-semibold mb-2 text-foreground">How to scan documents?</h3>
                     <p className="text-sm text-muted-foreground">
                       Tap the Scan button, allow camera access, and position your document within the frame. The app will automatically detect and capture it.
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-2">Managing reminders</h3>
+                    <h3 className="font-semibold mb-2 text-foreground">Managing reminders</h3>
                     <p className="text-sm text-muted-foreground">
                       Reminders are automatically set based on document expiry dates. You can customize them in the document details page.
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-2">Need more help?</h3>
+                    <h3 className="font-semibold mb-2 text-foreground">Need more help?</h3>
                     <p className="text-sm text-muted-foreground">
                       Contact us through the feedback form or email remind659@gmail.com
                     </p>
@@ -353,19 +353,19 @@ export default function Profile() {
                 </DialogHeader>
                 <div className="pt-4 space-y-4">
                   <div>
-                    <p className="text-sm font-medium mb-2">Email Support</p>
+                    <p className="text-sm font-medium mb-2 text-foreground">Email Support</p>
                     <a href="mailto:remind659@gmail.com" className="text-sm text-primary hover:underline">
                       remind659@gmail.com
                     </a>
                   </div>
                   <div>
-                    <p className="text-sm font-medium mb-2">Business Hours</p>
+                    <p className="text-sm font-medium mb-2 text-foreground">Business Hours</p>
                     <p className="text-sm text-muted-foreground">
                       Monday - Friday: 9:00 AM - 6:00 PM
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium mb-2">Response Time</p>
+                    <p className="text-sm font-medium mb-2 text-foreground">Response Time</p>
                     <p className="text-sm text-muted-foreground">
                       We typically respond within 24-48 hours
                     </p>
@@ -390,11 +390,11 @@ export default function Profile() {
                 <div className="pt-4 space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">Version</span>
-                    <span className="text-sm font-medium">1.0.0</span>
+                    <span className="text-sm font-medium text-foreground">1.0.0</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">Build</span>
-                    <span className="text-sm font-medium">2025.01</span>
+                    <span className="text-sm font-medium text-foreground">2025.01</span>
                   </div>
                   <div className="pt-4 border-t">
                     <p className="text-sm text-muted-foreground">
