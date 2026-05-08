@@ -310,7 +310,7 @@ export default function Profile() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-2">Managing reminders</h3>
+                    <h3 className="font-semibold mb-2 text-foreground">Managing reminders</h3>
                     <p className="text-sm text-muted-foreground">
                       Reminders are automatically set based on document expiry dates. You can customize them in the document details page.
                     </p>
