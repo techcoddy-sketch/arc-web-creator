@@ -14,6 +14,7 @@ import { getSignedUrl } from "@/utils/signedUrl";
 import { AvatarEditPopover } from "@/components/profile/AvatarEditPopover";
 import { EditProfileSheet } from "@/components/profile/EditProfileSheet";
 import { cn } from "@/lib/utils";
+import { ThemePicker } from "@/components/settings/ThemePicker";
 
 
 interface Profile {
