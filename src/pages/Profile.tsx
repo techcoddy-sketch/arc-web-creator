@@ -316,7 +316,7 @@ export default function Profile() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-2">Need more help?</h3>
+                    <h3 className="font-semibold mb-2 text-foreground">Need more help?</h3>
                     <p className="text-sm text-muted-foreground">
                       Contact us through the feedback form or email remind659@gmail.com
                     </p>
