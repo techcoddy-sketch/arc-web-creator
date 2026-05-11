@@ -11,9 +11,11 @@ import { SafeAreaContainer } from "@/components/layout/SafeAreaContainer";
 import { DocumentStats } from "@/components/dashboard/DocumentStats";
 import { ExpiryTimeline } from "@/components/dashboard/ExpiryTimeline";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
 import { getDocumentStatus } from "@/utils/documentStatus";
 import { sendTestNotification } from "@/utils/notifications";
+import { getSignedUrl } from "@/utils/signedUrl";
 
 interface Document {
   id: string;
@@ -56,6 +58,28 @@ export default function Dashboard() {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [loading, setLoading] = useState(true);
   const [sendingTest, setSendingTest] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState<string>("");
+
+  useEffect(() => {
+    if (!user) return;
+    (async () => {
+      const { data } = await supabase
+        .from("profiles")
+        .select("avatar_url, display_name")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      if (data?.display_name) setDisplayName(data.display_name);
+      if (data?.avatar_url) {
+        if (data.avatar_url.startsWith("http")) {
+          setAvatarUrl(data.avatar_url);
+        } else {
+          const url = await getSignedUrl("document-images", data.avatar_url);
+          if (url) setAvatarUrl(url);
+        }
+      }
+    })();
+  }, [user]);
 
   // Log first meaningful paint
   useEffect(() => {
@@ -143,9 +167,19 @@ export default function Dashboard() {
         style={{ paddingBottom: 'calc(5rem + env(safe-area-inset-bottom))' }}
       >
         <header className="bg-background/80 backdrop-blur-xl border-b border-border/50 px-4 py-4">
-          <div className="w-full max-w-4xl mx-auto">
-            <h1 className="text-2xl font-semibold text-gradient mb-1">Dashboard</h1>
-            <p className="text-base text-muted-foreground">Welcome back! Here's your document overview.</p>
+          <div className="w-full max-w-4xl mx-auto flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <h1 className="text-2xl font-semibold text-gradient mb-1">Dashboard</h1>
+              <p className="text-base text-muted-foreground">Welcome back! Here's your document overview.</p>
+            </div>
+            <Link to="/profile" aria-label="Open profile" className="shrink-0">
+              <Avatar className="h-10 w-10 ring-2 ring-primary/20 hover:ring-primary/40 transition-all">
+                {avatarUrl && <AvatarImage src={avatarUrl} alt={displayName || "Profile"} />}
+                <AvatarFallback className="bg-primary text-primary-foreground text-sm font-semibold">
+                  {(displayName || user?.email || "U").charAt(0).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+            </Link>
           </div>
         </header>
 
