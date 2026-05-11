@@ -178,6 +178,11 @@ const App = () => (
               <ChatBot />
             </Suspense>
 
+            {/* Onboarding overlay for new authenticated users */}
+            <Suspense fallback={null}>
+              <Onboarding />
+            </Suspense>
+
             <Suspense fallback={<PageFallback />}>
               <Routes>
                 <Route path="/auth" element={<Auth />} />
