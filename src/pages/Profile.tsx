@@ -15,6 +15,7 @@ import { AvatarEditPopover } from "@/components/profile/AvatarEditPopover";
 import { EditProfileSheet } from "@/components/profile/EditProfileSheet";
 import { cn } from "@/lib/utils";
 import { ThemePicker } from "@/components/settings/ThemePicker";
+import { PersonalizationSection } from "@/components/intelligence/PersonalizationSection";
 
 
 interface Profile {
@@ -288,6 +289,11 @@ export default function Profile() {
                 <ThemePicker />
               </div>
             )}
+          </SettingsSection>
+
+          {/* Personalization (adaptive intelligence) */}
+          <SettingsSection title="Intelligence">
+            <PersonalizationSection />
           </SettingsSection>
 
           {/* Support Section */}
