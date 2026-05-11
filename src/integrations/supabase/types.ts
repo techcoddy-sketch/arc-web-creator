@@ -380,6 +380,8 @@ export type Database = {
           expiry_reminders_enabled: boolean | null
           id: string
           notification_sounds: Json | null
+          onboarding_completed: boolean
+          onboarding_preferences: Json
           phone_number: string | null
           preferred_notification_time: string | null
           push_notifications_enabled: boolean | null
@@ -399,6 +401,8 @@ export type Database = {
           expiry_reminders_enabled?: boolean | null
           id?: string
           notification_sounds?: Json | null
+          onboarding_completed?: boolean
+          onboarding_preferences?: Json
           phone_number?: string | null
           preferred_notification_time?: string | null
           push_notifications_enabled?: boolean | null
@@ -418,6 +422,8 @@ export type Database = {
           expiry_reminders_enabled?: boolean | null
           id?: string
           notification_sounds?: Json | null
+          onboarding_completed?: boolean
+          onboarding_preferences?: Json
           phone_number?: string | null
           preferred_notification_time?: string | null
           push_notifications_enabled?: boolean | null
