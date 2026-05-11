@@ -58,6 +58,28 @@ export default function Dashboard() {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [loading, setLoading] = useState(true);
   const [sendingTest, setSendingTest] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState<string>("");
+
+  useEffect(() => {
+    if (!user) return;
+    (async () => {
+      const { data } = await supabase
+        .from("profiles")
+        .select("avatar_url, display_name")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      if (data?.display_name) setDisplayName(data.display_name);
+      if (data?.avatar_url) {
+        if (data.avatar_url.startsWith("http")) {
+          setAvatarUrl(data.avatar_url);
+        } else {
+          const url = await getSignedUrl("document-images", data.avatar_url);
+          if (url) setAvatarUrl(url);
+        }
+      }
+    })();
+  }, [user]);
 
   // Log first meaningful paint
   useEffect(() => {
