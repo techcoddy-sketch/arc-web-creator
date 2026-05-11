@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Trash2, Clock, Calendar, Edit } from "lucide-react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { ArrowLeft, Trash2, Clock, Calendar, Edit, BellOff } from "lucide-react";
+import { AdaptiveSnoozeSheet } from "@/components/intelligence/AdaptiveSnoozeSheet";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -27,14 +28,42 @@ export default function TaskDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [task, setTask] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [timezone, setTimezone] = useState("UTC");
+  const [snoozeOpen, setSnoozeOpen] = useState(false);
 
   useEffect(() => {
     if (id) fetchAll();
   }, [id]);
+
+  // Auto-open snooze sheet when arriving from a notification deep link
+  useEffect(() => {
+    if (searchParams.get("snooze") === "1" && task?.status === "pending") {
+      setSnoozeOpen(true);
+      const next = new URLSearchParams(searchParams);
+      next.delete("snooze");
+      setSearchParams(next, { replace: true });
+    }
+  }, [searchParams, task, setSearchParams]);
+
+  const handleSnooze = async (value: number | "tonight" | "tomorrow") => {
+    try {
+      await supabase.functions.invoke("notification-action", {
+        body: { entity_type: "task", entity_id: id, action: "snooze", snooze: value },
+      });
+      toast({
+        title: "Snoozed",
+        description: typeof value === "number" ? `Reminding you in ${value} min.` : `Reminding you ${value}.`,
+      });
+      const m = await import("@/hooks/useTasksData");
+      m.clearTasksCache();
+    } catch (e: any) {
+      toast({ title: "Couldn't snooze", description: e?.message ?? "Try again", variant: "destructive" });
+    }
+  };
 
   const fetchAll = async () => {
     try {
