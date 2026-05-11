@@ -150,7 +150,6 @@ async function sendNotification(supabase: any, task: Task, type: 'first' | 'recu
       ? `Starts now at ${startLocalString}!`
       : `Started at ${startLocalString}. Keep going!`;
 
-    const { getReminderButtons } = await import('../_shared/notificationActions.ts');
     return await sendUnifiedNotification(supabase, {
       userId: task.user_id,
       title: funnyMsg.title,
@@ -158,11 +157,8 @@ async function sendNotification(supabase: any, task: Task, type: 'first' | 'recu
       data: { 
         type: 'task_reminder', 
         task_id: task.id,
-        notification_type: type,
-        entity_type: 'task',
-        entity_id: task.id,
+        notification_type: type
       },
-      buttons: getReminderButtons('task'),
     });
   } catch (error) {
     console.error('Error sending notification:', error);

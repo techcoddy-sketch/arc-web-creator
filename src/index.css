@@ -162,8 +162,6 @@
     overflow-x: hidden;
     overflow-y: auto;
     @apply bg-background text-foreground antialiased;
-    /* Smooth theme switching — interpolate surface + text colors */
-    transition: background-color 280ms ease, color 280ms ease;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-size: 15px;
     line-height: 1.6;
@@ -177,20 +175,6 @@
   * {
     @apply border-border;
     scroll-behavior: smooth;
-  }
-
-  /* Theme transition — apply a tasteful fade to surfaces, borders and text
-     without animating layout-affecting properties. Respect reduced motion. */
-  body, body * {
-    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
-    transition-duration: 240ms;
-    transition-timing-function: ease;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    body, body * {
-      transition-duration: 0ms !important;
-    }
   }
 
   h1, h2, h3, h4, h5, h6 {

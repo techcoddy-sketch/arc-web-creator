@@ -65,6 +65,3 @@ verify_jwt = false
 
 [functions.detect-document-bounds]
 verify_jwt = true
-
-[functions.notification-action]
-verify_jwt = true

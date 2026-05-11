@@ -148,7 +148,7 @@ export default function Tasks() {
               onClick={() => navigate("/task-history")}
               variant="outline"
               size="sm"
-              className="rounded-full text-black"
+              className="rounded-full"
             >
               History
             </Button>

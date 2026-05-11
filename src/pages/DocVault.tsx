@@ -414,7 +414,7 @@ export default function DocVault() {
                     startCamera();
                   }}
                   variant="outline"
-                  className="gap-2 text-black"
+                  className="gap-2"
                 >
                   <CameraIcon className="h-4 w-4" />
                   Scan
@@ -463,7 +463,7 @@ export default function DocVault() {
                   <div className="flex flex-col sm:flex-row gap-2 justify-center max-w-sm mx-auto">
                     <Button 
                       variant="outline" 
-                      className="w-full sm:w-auto text-black"
+                      className="w-full sm:w-auto"
                       onClick={() => {
                         setUploadCategoryId(selectedCategory);
                         startCamera();

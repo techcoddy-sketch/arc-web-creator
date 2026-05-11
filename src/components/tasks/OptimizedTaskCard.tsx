@@ -12,7 +12,6 @@ import { toZonedTime } from "date-fns-tz";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { LazyAIRecommendations } from "./LazyAIRecommendations";
-import { logEvent as logBehaviorEvent } from "@/lib/intelligence/store";
 
 interface Task {
   id: string;
@@ -98,7 +97,6 @@ function OptimizedTaskCardComponent({
         description: `Great job finishing "${task.title}"!`,
       });
       onRefresh();
-      void logBehaviorEvent({ type: "complete", entity_type: "task", entity_id: task.id });
 
       const { error } = await supabase
         .from("tasks")

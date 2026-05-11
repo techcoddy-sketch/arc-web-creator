@@ -146,7 +146,6 @@ async function sendDocumentReminders(
 
       // Send push notification
       if (profile.push_notifications_enabled) {
-        const { getReminderButtons } = await import('../_shared/notificationActions.ts');
         await sendUnifiedNotification(supabase, {
           userId: profile.user_id,
           title: title,
@@ -154,11 +153,8 @@ async function sendDocumentReminders(
           data: { 
             type: 'document_reminder',
             document_id: reminder.document_id,
-            reminder_id: reminder.id,
-            entity_type: 'document_reminder',
-            entity_id: reminder.id,
+            reminder_id: reminder.id
           },
-          buttons: getReminderButtons('document'),
         });
       }
 

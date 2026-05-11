@@ -8,8 +8,6 @@ interface OneSignalPayload {
   title: string;
   message: string;
   data?: Record<string, string>;
-  buttons?: { id: string; text: string; icon?: string }[];
-  url?: string;
 }
 
 /**
@@ -64,24 +62,13 @@ export async function sendOneSignalNotification(
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), ONESIGNAL_TIMEOUT_MS);
 
-    const oneSignalMessage: Record<string, unknown> = {
+    const oneSignalMessage = {
       app_id: appId,
       include_player_ids: uniquePlayerIds,
       headings: { en: payload.title },
       contents: { en: payload.message },
       data: payload.data || {},
     };
-
-    if (payload.buttons && payload.buttons.length > 0) {
-      // Android-style buttons
-      oneSignalMessage.buttons = payload.buttons;
-      // iOS category — apps can register matching category for buttons
-      oneSignalMessage.ios_category = 'REMINDER_ACTIONS';
-    }
-
-    if (payload.url) {
-      oneSignalMessage.url = payload.url;
-    }
 
     const response = await fetch(ONESIGNAL_API_URL, {
       method: 'POST',

@@ -43,21 +43,11 @@ export interface Document {
   updated_at: string;
 }
 
-export interface NotificationButton {
-  id: string;
-  text: string;
-  icon?: string;
-}
-
 export interface NotificationPayload {
   userId: string;
   title: string;
   message: string;
   data?: Record<string, string>;
-  /** Action buttons rendered on the OS notification (max 3 on Android). */
-  buttons?: NotificationButton[];
-  /** Optional deep-link URL opened on body tap. */
-  url?: string;
 }
 
 export interface ApiResponse {

@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
-import { ThemeProvider } from "@/hooks/useTheme";
 import { ProtectedRoute } from "@/components/layout/ProtectedRoute";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { lazy, Suspense, useEffect } from "react";
@@ -43,7 +42,6 @@ const HelpCenter = lazy(() => import("./pages/HelpCenter"));
 
 // Lazy-load heavy components that aren't needed at startup
 const ChatBot = lazy(() => import("./components/chatbot/ChatBot").then(m => ({ default: m.ChatBot })));
-const Onboarding = lazy(() => import("./components/onboarding/Onboarding"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -164,7 +162,6 @@ if (typeof window !== 'undefined') {
 const App = () => (
   <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
       <AuthProvider>
         <TooltipProvider>
           <Toaster />
@@ -178,11 +175,6 @@ const App = () => (
             {/* ChatBot loaded lazily after main content */}
             <Suspense fallback={null}>
               <ChatBot />
-            </Suspense>
-
-            {/* Onboarding overlay for new authenticated users */}
-            <Suspense fallback={null}>
-              <Onboarding />
             </Suspense>
 
             <Suspense fallback={<PageFallback />}>
@@ -214,7 +206,6 @@ const App = () => (
           </BrowserRouter>
         </TooltipProvider>
       </AuthProvider>
-      </ThemeProvider>
     </QueryClientProvider>
   </ErrorBoundary>
 );
