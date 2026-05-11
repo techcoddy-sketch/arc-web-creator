@@ -42,7 +42,7 @@ export async function fetchRemotePreferences(userId: string): Promise<LearnedPre
       .eq("user_id", userId)
       .maybeSingle();
     if (error || !data) return null;
-    return data.data as LearnedPreferences;
+    return data.data as unknown as LearnedPreferences;
   } catch {
     return null;
   }
