@@ -1,5 +1,6 @@
 import OneSignal from "onesignal-cordova-plugin";
 import { supabase } from "@/integrations/supabase/client";
+import { logEvent as logBehaviorEvent } from "@/lib/intelligence/store";
 
 const ONESIGNAL_APP_ID = "8cced195-0fd2-487f-9f10-2a8bc898ff4e";
 
@@ -90,10 +91,12 @@ export const initOneSignal = () => {
 
       if (actionId === "complete") {
         await callAction({ ...entity, action: "complete" });
+        void logBehaviorEvent({ type: "complete", entity_type: entity.entity_type, entity_id: entity.entity_id });
         return;
       }
       if (actionId === "snooze_1h") {
         await callAction({ ...entity, action: "snooze", snooze: 60 });
+        void logBehaviorEvent({ type: "snooze", snooze_minutes: 60, entity_type: entity.entity_type, entity_id: entity.entity_id });
         return;
       }
       if (actionId === "more") {
