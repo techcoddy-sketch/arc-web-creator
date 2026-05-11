@@ -160,13 +160,23 @@ export default function TaskDetail() {
           </div>
           <div className="flex items-center gap-2">
             {task?.status === "pending" && (
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => navigate(`/edit-task/${id}`)}
-              >
-                <Edit className="h-5 w-5" />
-              </Button>
+              <>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setSnoozeOpen(true)}
+                  aria-label="Snooze"
+                >
+                  <BellOff className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => navigate(`/edit-task/${id}`)}
+                >
+                  <Edit className="h-5 w-5" />
+                </Button>
+              </>
             )}
             <AlertDialog>
               <AlertDialogTrigger asChild>
@@ -280,6 +290,14 @@ export default function TaskDetail() {
           )}
         </Card>
       </div>
+      <AdaptiveSnoozeSheet
+        open={snoozeOpen}
+        onOpenChange={setSnoozeOpen}
+        onSnooze={handleSnooze}
+        entityType="task"
+        entityId={id}
+        title={task?.title}
+      />
       <BottomNavigation />
     </div>
   );
