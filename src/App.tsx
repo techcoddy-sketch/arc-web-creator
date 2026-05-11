@@ -43,6 +43,7 @@ const HelpCenter = lazy(() => import("./pages/HelpCenter"));
 
 // Lazy-load heavy components that aren't needed at startup
 const ChatBot = lazy(() => import("./components/chatbot/ChatBot").then(m => ({ default: m.ChatBot })));
+const Onboarding = lazy(() => import("./components/onboarding/Onboarding"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -177,6 +178,11 @@ const App = () => (
             {/* ChatBot loaded lazily after main content */}
             <Suspense fallback={null}>
               <ChatBot />
+            </Suspense>
+
+            {/* Onboarding overlay for new authenticated users */}
+            <Suspense fallback={null}>
+              <Onboarding />
             </Suspense>
 
             <Suspense fallback={<PageFallback />}>
