@@ -11,9 +11,11 @@ import { SafeAreaContainer } from "@/components/layout/SafeAreaContainer";
 import { DocumentStats } from "@/components/dashboard/DocumentStats";
 import { ExpiryTimeline } from "@/components/dashboard/ExpiryTimeline";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
 import { getDocumentStatus } from "@/utils/documentStatus";
 import { sendTestNotification } from "@/utils/notifications";
+import { getSignedUrl } from "@/utils/signedUrl";
 
 interface Document {
   id: string;
