@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth theme transitions */
+html {
+  transition: background-color 250ms ease, color 250ms ease;
+}
+html *,
+html *::before,
+html *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
 /* Calm Professional Light Design System — all colors HSL */
 
 @layer base {
