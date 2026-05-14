@@ -404,6 +404,7 @@ export type Database = {
           preferred_notification_time: string | null
           push_notifications_enabled: boolean | null
           renewal_reminders_enabled: boolean | null
+          theme_preference: Json
           timezone: string | null
           updated_at: string
           user_id: string
@@ -425,6 +426,7 @@ export type Database = {
           preferred_notification_time?: string | null
           push_notifications_enabled?: boolean | null
           renewal_reminders_enabled?: boolean | null
+          theme_preference?: Json
           timezone?: string | null
           updated_at?: string
           user_id: string
@@ -446,6 +448,7 @@ export type Database = {
           preferred_notification_time?: string | null
           push_notifications_enabled?: boolean | null
           renewal_reminders_enabled?: boolean | null
+          theme_preference?: Json
           timezone?: string | null
           updated_at?: string
           user_id?: string
