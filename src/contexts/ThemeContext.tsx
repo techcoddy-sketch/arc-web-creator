@@ -102,7 +102,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     if (user) {
       supabase
         .from("profiles")
-        .update({ theme_preference: next })
+        .update({ theme_preference: { theme: next.theme, mode: next.mode } as any })
         .eq("user_id", user.id)
         .then(({ error }) => {
           if (error) console.warn("Theme persist error:", error.message);
