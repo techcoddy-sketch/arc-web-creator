@@ -21,7 +21,7 @@ Deno.serve(async (req) => {
     return handleCorsOptions();
   }
 
-  const auth = verifyCronSecret(req);
+  const auth = await verifyCronSecret(req);
   if (!auth.ok) return auth.response;
 
   try {

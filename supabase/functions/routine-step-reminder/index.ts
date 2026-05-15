@@ -43,7 +43,7 @@ function buildMessage(templates: { title: string; message: string }[], taskName:
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return handleCorsOptions();
 
-  const auth = verifyCronSecret(req);
+  const auth = await verifyCronSecret(req);
   if (!auth.ok) return auth.response;
 
   try {
