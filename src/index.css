@@ -27,13 +27,13 @@ html *::after {
 
     /* Background: soft warm off-white */
     --background: 40 25% 97%;
-    --foreground: 220 15% 12%;
+    --foreground: 0 0% 0%;
 
     --card: 40 30% 99%;
-    --card-foreground: 220 15% 12%;
+    --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 12%;
+    --popover-foreground: 0 0% 0%;
 
     /* Primary: medium vermilion */
     --primary: 10 78% 53%;
