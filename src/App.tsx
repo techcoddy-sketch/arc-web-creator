@@ -12,6 +12,7 @@ import { speakWelcome } from "@/utils/voiceGreeting";
 
 import AuthEventListener from "./components/auth/AuthEventListener";
 import { OfflineIndicator } from "./components/layout/OfflineIndicator";
+import { ThemeProvider } from "./components/theme/ThemeProvider";
 
 // ── Only eagerly load the landing page (Dashboard) ──
 import Dashboard from "./pages/Dashboard";
@@ -161,52 +162,54 @@ if (typeof window !== 'undefined') {
 // ── MAIN APP ──
 const App = () => (
   <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
 
-          <BrowserRouter>
-            <AuthEventListener />
-            <BackgroundInitializer />
-            <OfflineIndicator />
+            <BrowserRouter>
+              <AuthEventListener />
+              <BackgroundInitializer />
+              <OfflineIndicator />
 
-            {/* ChatBot loaded lazily after main content */}
-            <Suspense fallback={null}>
-              <ChatBot />
-            </Suspense>
+              {/* ChatBot loaded lazily after main content */}
+              <Suspense fallback={null}>
+                <ChatBot />
+              </Suspense>
 
-            <Suspense fallback={<PageFallback />}>
-              <Routes>
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
+              <Suspense fallback={<PageFallback />}>
+                <Routes>
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/reset-password" element={<ResetPassword />} />
 
-                <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-                <Route path="/documents" element={<ProtectedRoute><Documents /></ProtectedRoute>} />
-                <Route path="/documents/:id" element={<ProtectedRoute><DocumentDetail /></ProtectedRoute>} />
-                <Route path="/documents/:id/edit" element={<ProtectedRoute><EditDocument /></ProtectedRoute>} />
-                <Route path="/scan" element={<ProtectedRoute><Scan /></ProtectedRoute>} />
-                <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
-                <Route path="/notification-settings" element={<ProtectedRoute><NotificationSettings /></ProtectedRoute>} />
-                <Route path="/notification-sound-settings" element={<ProtectedRoute><NotificationSoundSettings /></ProtectedRoute>} />
-                <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-                <Route path="/docvault" element={<ProtectedRoute><DocVault /></ProtectedRoute>} />
-                <Route path="/tasks" element={<ProtectedRoute><Tasks /></ProtectedRoute>} />
-                <Route path="/task-history" element={<ProtectedRoute><TaskHistory /></ProtectedRoute>} />
-                <Route path="/add-task" element={<ProtectedRoute><AddTask /></ProtectedRoute>} />
-                <Route path="/task/:id" element={<ProtectedRoute><TaskDetail /></ProtectedRoute>} />
-                <Route path="/edit-task/:id" element={<ProtectedRoute><EditTask /></ProtectedRoute>} />
-                <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-                <Route path="/test-emails" element={<ProtectedRoute><TestEmails /></ProtectedRoute>} />
-                <Route path="/test-onesignal" element={<ProtectedRoute><TestOneSignal /></ProtectedRoute>} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </TooltipProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+                  <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                  <Route path="/documents" element={<ProtectedRoute><Documents /></ProtectedRoute>} />
+                  <Route path="/documents/:id" element={<ProtectedRoute><DocumentDetail /></ProtectedRoute>} />
+                  <Route path="/documents/:id/edit" element={<ProtectedRoute><EditDocument /></ProtectedRoute>} />
+                  <Route path="/scan" element={<ProtectedRoute><Scan /></ProtectedRoute>} />
+                  <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
+                  <Route path="/notification-settings" element={<ProtectedRoute><NotificationSettings /></ProtectedRoute>} />
+                  <Route path="/notification-sound-settings" element={<ProtectedRoute><NotificationSoundSettings /></ProtectedRoute>} />
+                  <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                  <Route path="/docvault" element={<ProtectedRoute><DocVault /></ProtectedRoute>} />
+                  <Route path="/tasks" element={<ProtectedRoute><Tasks /></ProtectedRoute>} />
+                  <Route path="/task-history" element={<ProtectedRoute><TaskHistory /></ProtectedRoute>} />
+                  <Route path="/add-task" element={<ProtectedRoute><AddTask /></ProtectedRoute>} />
+                  <Route path="/task/:id" element={<ProtectedRoute><TaskDetail /></ProtectedRoute>} />
+                  <Route path="/edit-task/:id" element={<ProtectedRoute><EditTask /></ProtectedRoute>} />
+                  <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+                  <Route path="/test-emails" element={<ProtectedRoute><TestEmails /></ProtectedRoute>} />
+                  <Route path="/test-onesignal" element={<ProtectedRoute><TestOneSignal /></ProtectedRoute>} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </BrowserRouter>
+          </TooltipProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   </ErrorBoundary>
 );
 
