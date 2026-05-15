@@ -195,6 +195,18 @@ html *::after {
     line-height: 1.2;
   }
 
+  /* Hover visibility: when an interactive surface darkens/colors on hover,
+     keep its text legible by forcing white. */
+  a:hover, button:hover, [role="button"]:hover, [role="menuitem"]:hover,
+  [role="option"]:hover, [data-hover-light]:hover {
+    color: #ffffff;
+  }
+  a:hover *, button:hover *, [role="button"]:hover *,
+  [role="menuitem"]:hover *, [role="option"]:hover *,
+  [data-hover-light]:hover * {
+    color: inherit;
+  }
+
   .safe-area {
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
