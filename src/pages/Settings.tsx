@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { InternationalPhoneInput } from "@/components/ui/international-phone-input";
 import { getCountryCode } from "@/utils/countryMapping";
 import { VoiceGreetingToggle } from "@/components/settings/VoiceGreetingToggle";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 interface Profile {
   id: string;
