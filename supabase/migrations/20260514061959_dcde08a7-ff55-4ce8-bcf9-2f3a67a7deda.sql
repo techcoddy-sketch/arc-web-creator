@@ -1,1 +1,0 @@
-ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS theme_preference jsonb NOT NULL DEFAULT '{"theme":"vermilion","mode":"system"}'::jsonb;

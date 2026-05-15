@@ -10,7 +10,7 @@ Deno.serve(async (req) => {
   // Restrict to server-side scheduler invocation only.
   // This function uses the service role and emails ALL users — it must
   // never be callable by an end user, even an authenticated one.
-  const auth = verifyCronSecret(req);
+  const auth = await verifyCronSecret(req);
   if (!auth.ok) return auth.response;
 
   try {

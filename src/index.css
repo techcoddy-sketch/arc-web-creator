@@ -2,18 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth theme transitions */
-html {
-  transition: background-color 250ms ease, color 250ms ease;
-}
-html *,
-html *::before,
-html *::after {
-  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
-  transition-duration: 200ms;
-  transition-timing-function: ease;
-}
-
 /* Calm Professional Light Design System — all colors HSL */
 
 @layer base {
@@ -27,13 +15,13 @@ html *::after {
 
     /* Background: soft warm off-white */
     --background: 40 25% 97%;
-    --foreground: 0 0% 0%;
+    --foreground: 220 15% 12%;
 
     --card: 40 30% 99%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 220 15% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 220 15% 12%;
 
     /* Primary: medium vermilion */
     --primary: 10 78% 53%;
@@ -58,11 +46,11 @@ html *::after {
 
     /* Secondary: soft neutral */
     --secondary: 40 20% 94%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary-foreground: 220 15% 25%;
 
     /* Muted */
     --muted: 40 15% 93%;
-    --muted-foreground: 0 0% 0%;
+    --muted-foreground: 220 10% 42%;
 
     /* Accent: muted teal — sparing use */
     --accent: 10 78% 53%;
@@ -89,11 +77,11 @@ html *::after {
 
     /* Sidebar */
     --sidebar-background: 40 30% 99%;
-    --sidebar-foreground: 0 0% 0%;
+    --sidebar-foreground: 220 15% 12%;
     --sidebar-primary: 10 78% 53%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 40 20% 94%;
-    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-accent-foreground: 220 15% 25%;
     --sidebar-border: 35 15% 88%;
     --sidebar-ring: 10 78% 53%;
   }
@@ -101,13 +89,13 @@ html *::after {
   .dark {
     /* Dark mode kept aligned with light palette tones */
     --background: 220 20% 10%;
-    --foreground: 0 0% 100%;
+    --foreground: 210 20% 92%;
 
     --card: 220 18% 14%;
-    --card-foreground: 0 0% 100%;
+    --card-foreground: 210 20% 92%;
 
     --popover: 220 18% 14%;
-    --popover-foreground: 0 0% 100%;
+    --popover-foreground: 210 20% 92%;
 
     --primary: 10 78% 55%;
     --primary-foreground: 0 0% 100%;
@@ -129,10 +117,10 @@ html *::after {
     --valid-bg: 145 30% 16%;
 
     --secondary: 220 18% 18%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary-foreground: 210 20% 88%;
 
     --muted: 220 15% 18%;
-    --muted-foreground: 0 0% 100%;
+    --muted-foreground: 220 10% 60%;
 
     --accent: 170 45% 45%;
     --accent-foreground: 0 0% 100%;
@@ -151,11 +139,11 @@ html *::after {
     --card-shadow-hover: 0 8px 30px rgba(249, 115, 22, 0.14);
 
     --sidebar-background: 220 22% 12%;
-    --sidebar-foreground: 0 0% 100%;
+    --sidebar-foreground: 210 20% 90%;
     --sidebar-primary: 10 78% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 30% 20%;
-    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-accent-foreground: 210 40% 75%;
     --sidebar-border: 220 15% 20%;
     --sidebar-ring: 10 78% 55%;
   }
@@ -193,18 +181,6 @@ html *::after {
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.2;
-  }
-
-  /* Hover visibility: when an interactive surface darkens/colors on hover,
-     keep its text legible by forcing white. */
-  a:hover, button:hover, [role="button"]:hover, [role="menuitem"]:hover,
-  [role="option"]:hover, [data-hover-light]:hover {
-    color: #ffffff;
-  }
-  a:hover *, button:hover *, [role="button"]:hover *,
-  [role="menuitem"]:hover *, [role="option"]:hover *,
-  [data-hover-light]:hover * {
-    color: inherit;
   }
 
   .safe-area {

@@ -1,6 +1,6 @@
 import { SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const ONESIGNAL_API_URL = 'https://onesignal.com/api/v1/notifications';
+const ONESIGNAL_API_URL = 'https://api.onesignal.com/notifications';
 const ONESIGNAL_TIMEOUT_MS = 10000;
 
 interface OneSignalPayload {
@@ -8,6 +8,8 @@ interface OneSignalPayload {
   title: string;
   message: string;
   data?: Record<string, string>;
+  buttons?: { id: string; text: string; icon?: string }[];
+  url?: string;
 }
 
 /**
@@ -62,7 +64,7 @@ export async function sendOneSignalNotification(
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), ONESIGNAL_TIMEOUT_MS);
 
-    const oneSignalMessage = {
+    const oneSignalMessage: Record<string, unknown> = {
       app_id: appId,
       include_player_ids: uniquePlayerIds,
       headings: { en: payload.title },
@@ -70,11 +72,22 @@ export async function sendOneSignalNotification(
       data: payload.data || {},
     };
 
+    if (payload.buttons && payload.buttons.length > 0) {
+      // Android-style buttons
+      oneSignalMessage.buttons = payload.buttons;
+      // iOS category — apps can register matching category for buttons
+      oneSignalMessage.ios_category = 'REMINDER_ACTIONS';
+    }
+
+    if (payload.url) {
+      oneSignalMessage.url = payload.url;
+    }
+
     const response = await fetch(ONESIGNAL_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Basic ${apiKey}`,
+        'Authorization': `Key ${apiKey.trim()}`,
       },
       body: JSON.stringify(oneSignalMessage),
       signal: controller.signal,

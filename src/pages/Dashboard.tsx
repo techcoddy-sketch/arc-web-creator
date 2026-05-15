@@ -4,10 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Camera, Bell, User } from "lucide-react";
+import { FileText, Camera, Bell } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { getSignedUrl } from "@/utils/signedUrl";
 import { BottomNavigation } from "@/components/layout/BottomNavigation";
 import { SafeAreaContainer } from "@/components/layout/SafeAreaContainer";
 import { DocumentStats } from "@/components/dashboard/DocumentStats";
@@ -58,8 +56,6 @@ export default function Dashboard() {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [loading, setLoading] = useState(true);
   const [sendingTest, setSendingTest] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
-  const [displayName, setDisplayName] = useState<string>("");
 
   // Log first meaningful paint
   useEffect(() => {
@@ -75,27 +71,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (user) fetchDashboardData();
-  }, [user]);
-
-  useEffect(() => {
-    if (!user) return;
-    (async () => {
-      const { data } = await supabase
-        .from("profiles")
-        .select("display_name, avatar_url")
-        .eq("user_id", user.id)
-        .maybeSingle();
-      if (!data) return;
-      setDisplayName(data.display_name || user.email?.split("@")[0] || "User");
-      if (data.avatar_url) {
-        if (data.avatar_url.startsWith("http")) {
-          setAvatarUrl(data.avatar_url);
-        } else {
-          const signed = await getSignedUrl("document-images", data.avatar_url);
-          setAvatarUrl(signed);
-        }
-      }
-    })();
   }, [user]);
 
   const fetchDashboardData = async () => {
@@ -168,23 +143,9 @@ export default function Dashboard() {
         style={{ paddingBottom: 'calc(5rem + env(safe-area-inset-bottom))' }}
       >
         <header className="bg-background/80 backdrop-blur-xl border-b border-border/50 px-4 py-4">
-          <div className="w-full max-w-4xl mx-auto flex items-center justify-between gap-4">
-            <div className="min-w-0">
-              <h1 className="text-2xl font-semibold text-gradient mb-1 truncate">Dashboard</h1>
-              <p className="text-base text-muted-foreground truncate">Welcome back! Here's your document overview.</p>
-            </div>
-            <Link
-              to="/profile"
-              aria-label="Open profile"
-              className="shrink-0 rounded-full ring-2 ring-border/60 hover:ring-primary/40 transition-all active:scale-95"
-            >
-              <Avatar className="h-11 w-11">
-                {avatarUrl && <AvatarImage src={avatarUrl} alt={displayName} />}
-                <AvatarFallback className="bg-primary/10 text-primary font-semibold">
-                  {displayName ? displayName.charAt(0).toUpperCase() : <User className="h-5 w-5" />}
-                </AvatarFallback>
-              </Avatar>
-            </Link>
+          <div className="w-full max-w-4xl mx-auto">
+            <h1 className="text-2xl font-semibold text-gradient mb-1">Dashboard</h1>
+            <p className="text-base text-muted-foreground">Welcome back! Here's your document overview.</p>
           </div>
         </header>
 

@@ -43,7 +43,7 @@ function buildMessage(templates: { title: string; message: string }[], taskName:
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return handleCorsOptions();
 
-  const auth = verifyCronSecret(req);
+  const auth = await verifyCronSecret(req);
   if (!auth.ok) return auth.response;
 
   try {
@@ -162,11 +162,13 @@ Deno.serve(async (req) => {
 
           const msg = buildMessage(templates, task.name, routine.name);
 
+          const { getReminderButtons } = await import('../_shared/notificationActions.ts');
           const sent = await sendUnifiedNotification(supabase, {
             userId: routine.user_id,
             title: msg.title,
             message: msg.message,
-            data: { type: 'routine_task', routine_id: routine.id, task_id: task.id, slot_id: slot.id },
+            data: { type: 'routine_task', routine_id: routine.id, task_id: task.id, slot_id: slot.id, entity_type: 'routine_step', entity_id: slot.id },
+            buttons: getReminderButtons('routine_step'),
           });
 
           if (sent) {

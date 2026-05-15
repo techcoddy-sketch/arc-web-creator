@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { ChevronRight, Download, User, LogOut, HelpCircle, MessageSquare, Info, Mail, FileCheck, Bell, Palette } from "lucide-react";
+import { ChevronRight, Download, User, LogOut, HelpCircle, MessageSquare, Info, Mail, FileCheck, Bell } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { BottomNavigation } from "@/components/layout/BottomNavigation";
 import { SafeAreaContainer } from "@/components/layout/SafeAreaContainer";
@@ -259,11 +259,6 @@ export default function Profile() {
           {/* Notification Settings */}
           <SettingsSection title="Notifications">
             <SettingsItem icon={Bell} title="Notification Settings" to="/notification-sound-settings" />
-          </SettingsSection>
-
-          {/* Appearance */}
-          <SettingsSection title="Appearance">
-            <SettingsItem icon={Palette} title="Theme & Mode" to="/settings/appearance" />
           </SettingsSection>
 
           {/* Support Section */}
