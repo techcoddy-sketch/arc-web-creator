@@ -214,6 +214,24 @@ export type Database = {
         }
         Relationships: []
       }
+      learned_preferences: {
+        Row: {
+          data: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          data?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          data?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       notification_tokens: {
         Row: {
           created_at: string
@@ -380,10 +398,13 @@ export type Database = {
           expiry_reminders_enabled: boolean | null
           id: string
           notification_sounds: Json | null
+          onboarding_completed: boolean
+          onboarding_preferences: Json
           phone_number: string | null
           preferred_notification_time: string | null
           push_notifications_enabled: boolean | null
           renewal_reminders_enabled: boolean | null
+          theme_preference: Json
           timezone: string | null
           updated_at: string
           user_id: string
@@ -399,10 +420,13 @@ export type Database = {
           expiry_reminders_enabled?: boolean | null
           id?: string
           notification_sounds?: Json | null
+          onboarding_completed?: boolean
+          onboarding_preferences?: Json
           phone_number?: string | null
           preferred_notification_time?: string | null
           push_notifications_enabled?: boolean | null
           renewal_reminders_enabled?: boolean | null
+          theme_preference?: Json
           timezone?: string | null
           updated_at?: string
           user_id: string
@@ -418,10 +442,13 @@ export type Database = {
           expiry_reminders_enabled?: boolean | null
           id?: string
           notification_sounds?: Json | null
+          onboarding_completed?: boolean
+          onboarding_preferences?: Json
           phone_number?: string | null
           preferred_notification_time?: string | null
           push_notifications_enabled?: boolean | null
           renewal_reminders_enabled?: boolean | null
+          theme_preference?: Json
           timezone?: string | null
           updated_at?: string
           user_id?: string
