@@ -1,34 +1,33 @@
 /**
  * Shared cron-secret authentication for scheduled edge functions.
- * All cron-triggered functions (verify_jwt = false) MUST validate
- * the x-cron-secret header against the CRON_SECRET env var to
- * prevent unauthenticated public invocation.
+ * Accepts either:
+ *   (a) x-cron-secret header matching CRON_SECRET, or
+ *   (b) Authorization: Bearer <SUPABASE_SERVICE_ROLE_KEY>
+ * Either is sufficient since both are server-side secrets.
  */
 export function verifyCronSecret(req: Request): { ok: true } | { ok: false; response: Response } {
-  const expected = Deno.env.get('CRON_SECRET');
-  const provided = req.headers.get('x-cron-secret');
+  const expectedCron = Deno.env.get('CRON_SECRET');
+  const providedCron = req.headers.get('x-cron-secret');
 
-  if (!expected) {
-    console.error('CRON_SECRET env var is not configured');
-    return {
-      ok: false,
-      response: new Response(
-        JSON.stringify({ error: 'Server misconfigured: CRON_SECRET not set' }),
-        { status: 500, headers: { 'Content-Type': 'application/json' } }
-      ),
-    };
+  if (expectedCron && providedCron && providedCron === expectedCron) {
+    return { ok: true };
   }
 
-  if (!provided || provided !== expected) {
-    console.error('Unauthorized cron invocation: missing or invalid x-cron-secret');
-    return {
-      ok: false,
-      response: new Response(
-        JSON.stringify({ error: 'Unauthorized' }),
-        { status: 401, headers: { 'Content-Type': 'application/json' } }
-      ),
-    };
+  const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+  const authHeader = req.headers.get('Authorization') || req.headers.get('authorization');
+  if (serviceRoleKey && authHeader) {
+    const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+    if (token && token === serviceRoleKey) {
+      return { ok: true };
+    }
   }
 
-  return { ok: true };
+  console.error('Unauthorized cron invocation: missing/invalid x-cron-secret and no valid service-role bearer');
+  return {
+    ok: false,
+    response: new Response(
+      JSON.stringify({ error: 'Unauthorized' }),
+      { status: 401, headers: { 'Content-Type': 'application/json' } }
+    ),
+  };
 }
