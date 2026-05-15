@@ -87,7 +87,7 @@ export async function sendOneSignalNotification(
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Basic ${apiKey}`,
+        'Authorization': `Key ${apiKey.trim()}`,
       },
       body: JSON.stringify(oneSignalMessage),
       signal: controller.signal,
