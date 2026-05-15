@@ -194,6 +194,22 @@ export default function Settings() {
           </CardContent>
         </Card>
 
+        {/* Appearance */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Appearance</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label>Theme</Label>
+              <ThemeToggle />
+              <p className="text-xs text-muted-foreground">
+                Choose Light, Dark, or follow your device's System setting.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* App Preferences */}
         <Card>
           <CardHeader>
