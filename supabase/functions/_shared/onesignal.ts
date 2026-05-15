@@ -1,6 +1,6 @@
 import { SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const ONESIGNAL_API_URL = 'https://onesignal.com/api/v1/notifications';
+const ONESIGNAL_API_URL = 'https://api.onesignal.com/notifications';
 const ONESIGNAL_TIMEOUT_MS = 10000;
 
 interface OneSignalPayload {
