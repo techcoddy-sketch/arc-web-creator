@@ -58,11 +58,11 @@ html *::after {
 
     /* Secondary: soft neutral */
     --secondary: 40 20% 94%;
-    --secondary-foreground: 220 15% 25%;
+    --secondary-foreground: 0 0% 0%;
 
     /* Muted */
     --muted: 40 15% 93%;
-    --muted-foreground: 220 10% 42%;
+    --muted-foreground: 0 0% 0%;
 
     /* Accent: muted teal — sparing use */
     --accent: 10 78% 53%;
