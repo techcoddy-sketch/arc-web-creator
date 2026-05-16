@@ -13,7 +13,7 @@ import { exportToCSV, exportToJSON } from "@/utils/exportData";
 import { getSignedUrl } from "@/utils/signedUrl";
 import { AvatarEditPopover } from "@/components/profile/AvatarEditPopover";
 import { EditProfileSheet } from "@/components/profile/EditProfileSheet";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { AppearanceSettings } from "@/components/theme/AppearanceSettings";
 
 
 interface Profile {
