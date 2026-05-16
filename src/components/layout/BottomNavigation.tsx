@@ -1,4 +1,4 @@
-import { Home, FileText, Camera, User, Vault, ClipboardList } from "lucide-react";
+import { Home, FileText, Camera, Vault, ClipboardList } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -8,7 +8,6 @@ const navigation = [
   { name: "Scan", href: "/scan", icon: Camera },
   { name: "Tasks", href: "/tasks", icon: ClipboardList },
   { name: "DocVault", href: "/docvault", icon: Vault },
-  { name: "Profile", href: "/profile", icon: User },
 ];
 
 export function BottomNavigation() {
