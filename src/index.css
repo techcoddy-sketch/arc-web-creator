@@ -204,6 +204,153 @@
   }
 }
 
+/* ============================================================
+   THEME PALETTES — applied via [data-theme="<name>"] on <html>
+   Each palette overrides accent surface tokens for light + dark.
+   Status colors (valid/expiring/expired) stay semantically stable.
+   ============================================================ */
+
+/* Vermilion (default) — already defined in :root / .dark above */
+
+/* Indigo — calm, focused */
+[data-theme="indigo"] {
+  --primary: 238 70% 58%;
+  --primary-light: 238 75% 68%;
+  --primary-soft: 238 80% 96%;
+  --primary-dark: 238 70% 48%;
+  --accent: 238 70% 58%;
+  --ring: 238 70% 58%;
+  --sidebar-primary: 238 70% 58%;
+  --sidebar-ring: 238 70% 58%;
+}
+[data-theme="indigo"].dark {
+  --primary: 238 75% 65%;
+  --primary-light: 238 80% 72%;
+  --primary-soft: 238 40% 22%;
+  --primary-dark: 238 70% 52%;
+  --accent: 238 70% 60%;
+  --ring: 238 75% 65%;
+}
+
+/* Emerald — fresh, productive */
+[data-theme="emerald"] {
+  --primary: 158 64% 38%;
+  --primary-light: 158 60% 48%;
+  --primary-soft: 158 60% 95%;
+  --primary-dark: 158 70% 30%;
+  --accent: 158 64% 38%;
+  --ring: 158 64% 38%;
+  --sidebar-primary: 158 64% 38%;
+  --sidebar-ring: 158 64% 38%;
+}
+[data-theme="emerald"].dark {
+  --primary: 158 60% 48%;
+  --primary-light: 158 65% 56%;
+  --primary-soft: 158 40% 18%;
+  --primary-dark: 158 70% 36%;
+  --accent: 158 55% 50%;
+  --ring: 158 60% 48%;
+}
+
+/* Slate — neutral, editorial */
+[data-theme="slate"] {
+  --primary: 220 25% 28%;
+  --primary-light: 220 20% 42%;
+  --primary-soft: 220 25% 95%;
+  --primary-dark: 220 30% 20%;
+  --accent: 220 25% 28%;
+  --ring: 220 25% 28%;
+  --sidebar-primary: 220 25% 28%;
+  --sidebar-ring: 220 25% 28%;
+}
+[data-theme="slate"].dark {
+  --primary: 220 20% 75%;
+  --primary-light: 220 20% 82%;
+  --primary-soft: 220 20% 22%;
+  --primary-dark: 220 20% 60%;
+  --primary-foreground: 220 25% 12%;
+  --accent: 220 20% 75%;
+  --ring: 220 20% 75%;
+}
+
+/* Rose — warm, gentle */
+[data-theme="rose"] {
+  --primary: 346 70% 52%;
+  --primary-light: 346 75% 64%;
+  --primary-soft: 346 75% 96%;
+  --primary-dark: 346 70% 44%;
+  --accent: 346 70% 52%;
+  --ring: 346 70% 52%;
+  --sidebar-primary: 346 70% 52%;
+  --sidebar-ring: 346 70% 52%;
+}
+[data-theme="rose"].dark {
+  --primary: 346 75% 60%;
+  --primary-light: 346 80% 68%;
+  --primary-soft: 346 40% 22%;
+  --primary-dark: 346 70% 48%;
+  --accent: 346 70% 58%;
+  --ring: 346 75% 60%;
+}
+
+/* Amber — golden, optimistic */
+[data-theme="amber"] {
+  --primary: 32 85% 48%;
+  --primary-light: 32 90% 58%;
+  --primary-soft: 32 90% 95%;
+  --primary-dark: 32 85% 40%;
+  --accent: 32 85% 48%;
+  --ring: 32 85% 48%;
+  --sidebar-primary: 32 85% 48%;
+  --sidebar-ring: 32 85% 48%;
+}
+[data-theme="amber"].dark {
+  --primary: 32 85% 56%;
+  --primary-light: 32 90% 64%;
+  --primary-soft: 32 50% 20%;
+  --primary-dark: 32 80% 46%;
+  --accent: 32 80% 54%;
+  --ring: 32 85% 56%;
+}
+
+/* Teal — calm, clinical */
+[data-theme="teal"] {
+  --primary: 178 65% 36%;
+  --primary-light: 178 60% 46%;
+  --primary-soft: 178 60% 95%;
+  --primary-dark: 178 70% 28%;
+  --accent: 178 65% 36%;
+  --ring: 178 65% 36%;
+  --sidebar-primary: 178 65% 36%;
+  --sidebar-ring: 178 65% 36%;
+}
+[data-theme="teal"].dark {
+  --primary: 178 60% 46%;
+  --primary-light: 178 65% 56%;
+  --primary-soft: 178 40% 18%;
+  --primary-dark: 178 70% 36%;
+  --accent: 178 55% 48%;
+  --ring: 178 60% 46%;
+}
+
+/* Smooth theme switching — color interpolation, no layout shift */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 280ms ease, color 280ms ease,
+              border-color 280ms ease, fill 280ms ease, stroke 280ms ease,
+              box-shadow 280ms ease !important;
+  transition-delay: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transition,
+  html.theme-transition * {
+    transition: none !important;
+  }
+}
+
 @layer utilities {
   /* Glassmorphism */
   .glass {
