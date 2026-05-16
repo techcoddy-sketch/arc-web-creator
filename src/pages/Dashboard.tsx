@@ -73,8 +73,28 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    if (user) fetchDashboardData();
+    if (user) {
+      fetchDashboardData();
+      fetchAvatar();
+    }
   }, [user]);
+
+  const fetchAvatar = async () => {
+    if (!user) return;
+    const { data } = await supabase
+      .from("profiles")
+      .select("avatar_url")
+      .eq("user_id", user.id)
+      .maybeSingle();
+    if (data?.avatar_url) {
+      if (data.avatar_url.startsWith("http")) {
+        setAvatarUrl(data.avatar_url);
+      } else {
+        const signed = await getSignedUrl("document-images", data.avatar_url);
+        if (signed) setAvatarUrl(signed);
+      }
+    }
+  };
 
   const fetchDashboardData = async () => {
     try {
