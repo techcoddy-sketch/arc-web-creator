@@ -58,6 +58,7 @@ export default function Dashboard() {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [loading, setLoading] = useState(true);
   const [sendingTest, setSendingTest] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
   // Log first meaningful paint
   useEffect(() => {
