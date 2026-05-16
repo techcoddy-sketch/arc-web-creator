@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useTheme as useNextTheme } from "next-themes";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import {
@@ -19,42 +20,22 @@ interface ThemePreferenceCtx {
 }
 
 const Ctx = createContext<ThemePreferenceCtx | null>(null);
-const STORAGE_KEY = "remonk.theme.preference";
+const STORAGE_KEY = "remonk.theme.palette";
 
-function readLocal(): { palette: PaletteId; mode: ThemeMode } {
+function readLocalPalette(): PaletteId {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      const palette = (PALETTES.find((p) => p.id === parsed.theme)?.id ??
-        DEFAULT_PALETTE) as PaletteId;
-      const mode = (["light", "dark", "system"].includes(parsed.mode)
-        ? parsed.mode
-        : DEFAULT_MODE) as ThemeMode;
-      return { palette, mode };
-    }
+    if (raw && PALETTES.some((p) => p.id === raw)) return raw as PaletteId;
   } catch {
     /* ignore */
   }
-  return { palette: DEFAULT_PALETTE, mode: DEFAULT_MODE };
+  return DEFAULT_PALETTE;
 }
 
 function applyPalette(palette: PaletteId) {
   const root = document.documentElement;
-  if (palette === "vermilion") {
-    root.removeAttribute("data-theme");
-  } else {
-    root.setAttribute("data-theme", palette);
-  }
-}
-
-function applyMode(mode: ThemeMode) {
-  const root = document.documentElement;
-  const isDark =
-    mode === "dark" ||
-    (mode === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
-  root.classList.toggle("dark", isDark);
-  root.style.colorScheme = isDark ? "dark" : "light";
+  if (palette === "vermilion") root.removeAttribute("data-theme");
+  else root.setAttribute("data-theme", palette);
 }
 
 function flashTransition() {
@@ -65,27 +46,23 @@ function flashTransition() {
 
 export function ThemePreferenceProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
-  const initial = readLocal();
-  const [palette, setPaletteState] = useState<PaletteId>(initial.palette);
-  const [mode, setModeState] = useState<ThemeMode>(initial.mode);
+  const { theme: nextMode, setTheme: setNextMode } = useNextTheme();
+  const [palette, setPaletteState] = useState<PaletteId>(() => {
+    const p = readLocalPalette();
+    if (typeof document !== "undefined") applyPalette(p);
+    return p;
+  });
   const previewRef = useRef<PaletteId | null>(null);
   const hydratedRef = useRef(false);
 
-  // Apply on mount + whenever the resolved values change
+  const mode: ThemeMode =
+    nextMode === "light" || nextMode === "dark" ? nextMode : DEFAULT_MODE;
+
   useEffect(() => {
     applyPalette(previewRef.current ?? palette);
   }, [palette]);
 
-  useEffect(() => {
-    applyMode(mode);
-    if (mode !== "system") return;
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const listener = () => applyMode("system");
-    mq.addEventListener("change", listener);
-    return () => mq.removeEventListener("change", listener);
-  }, [mode]);
-
-  // Hydrate from profiles.theme_preference once user is known
+  // Hydrate from profile once
   useEffect(() => {
     if (!user || hydratedRef.current) return;
     hydratedRef.current = true;
@@ -101,24 +78,18 @@ export function ThemePreferenceProvider({ children }: { children: React.ReactNod
       if (!pref) return;
       const nextPalette =
         (PALETTES.find((p) => p.id === pref.theme)?.id as PaletteId) ?? DEFAULT_PALETTE;
-      const nextMode = (
+      const nextModeVal = (
         ["light", "dark", "system"].includes(pref.mode || "") ? pref.mode : DEFAULT_MODE
       ) as ThemeMode;
       setPaletteState(nextPalette);
-      setModeState(nextMode);
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({ theme: nextPalette, mode: nextMode })
-      );
+      localStorage.setItem(STORAGE_KEY, nextPalette);
+      setNextMode(nextModeVal);
     })();
-  }, [user]);
+  }, [user, setNextMode]);
 
   const persist = useCallback(
     async (next: { palette: PaletteId; mode: ThemeMode }) => {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({ theme: next.palette, mode: next.mode })
-      );
+      localStorage.setItem(STORAGE_KEY, next.palette);
       if (!user) return;
       await supabase
         .from("profiles")
@@ -141,10 +112,10 @@ export function ThemePreferenceProvider({ children }: { children: React.ReactNod
   const setMode = useCallback(
     (m: ThemeMode) => {
       flashTransition();
-      setModeState(m);
+      setNextMode(m);
       persist({ palette, mode: m });
     },
-    [palette, persist]
+    [palette, persist, setNextMode]
   );
 
   const previewPalette = useCallback(
