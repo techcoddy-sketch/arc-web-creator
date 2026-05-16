@@ -13,7 +13,7 @@ import { exportToCSV, exportToJSON } from "@/utils/exportData";
 import { getSignedUrl } from "@/utils/signedUrl";
 import { AvatarEditPopover } from "@/components/profile/AvatarEditPopover";
 import { EditProfileSheet } from "@/components/profile/EditProfileSheet";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { AppearanceSettings } from "@/components/theme/AppearanceSettings";
 
 
 interface Profile {
@@ -264,13 +264,7 @@ export default function Profile() {
 
           {/* Appearance */}
           <SettingsSection title="Appearance">
-            <div className="p-4 space-y-3">
-              <p className="text-sm font-medium text-foreground">Theme</p>
-              <ThemeToggle />
-              <p className="text-xs text-muted-foreground">
-                Choose Light, Dark, or follow your device's System setting.
-              </p>
-            </div>
+            <AppearanceSettings />
           </SettingsSection>
 
           {/* Support Section */}

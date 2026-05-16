@@ -13,6 +13,7 @@ import { speakWelcome } from "@/utils/voiceGreeting";
 import AuthEventListener from "./components/auth/AuthEventListener";
 import { OfflineIndicator } from "./components/layout/OfflineIndicator";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
+import { ThemePreferenceProvider } from "./components/theme/ThemePreferenceProvider";
 
 // ── Only eagerly load the landing page (Dashboard) ──
 import Dashboard from "./pages/Dashboard";
@@ -165,6 +166,7 @@ const App = () => (
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
+          <ThemePreferenceProvider>
           <TooltipProvider>
             <Toaster />
             <Sonner />
@@ -207,6 +209,7 @@ const App = () => (
               </Suspense>
             </BrowserRouter>
           </TooltipProvider>
+          </ThemePreferenceProvider>
         </AuthProvider>
       </QueryClientProvider>
     </ThemeProvider>
