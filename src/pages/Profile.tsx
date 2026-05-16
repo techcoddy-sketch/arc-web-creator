@@ -264,13 +264,7 @@ export default function Profile() {
 
           {/* Appearance */}
           <SettingsSection title="Appearance">
-            <div className="p-4 space-y-3">
-              <p className="text-sm font-medium text-foreground">Theme</p>
-              <ThemeToggle />
-              <p className="text-xs text-muted-foreground">
-                Choose Light, Dark, or follow your device's System setting.
-              </p>
-            </div>
+            <AppearanceSettings />
           </SettingsSection>
 
           {/* Support Section */}
