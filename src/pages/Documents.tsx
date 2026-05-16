@@ -296,7 +296,7 @@ export default function Documents() {
                             <img src={category.iconSrc} alt={category.name} className="w-10 h-10 object-contain" loading="lazy" />
                             <h3 className="text-sm font-medium text-foreground">{category.name}</h3>
                           </div>
-                          <Badge variant="secondary" className="font-semibold">{count}</Badge>
+                          <Badge variant="secondary" className="font-semibold text-foreground dark:text-white">{count}</Badge>
                         </div>
                       </CardContent>
                     </Card>
