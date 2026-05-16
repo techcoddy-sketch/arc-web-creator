@@ -166,9 +166,19 @@ export default function Dashboard() {
         style={{ paddingBottom: 'calc(5rem + env(safe-area-inset-bottom))' }}
       >
         <header className="bg-background/80 backdrop-blur-xl border-b border-border/50 px-4 py-4">
-          <div className="w-full max-w-4xl mx-auto">
-            <h1 className="text-2xl font-semibold text-gradient mb-1">Dashboard</h1>
-            <p className="text-base text-muted-foreground">Welcome back! Here's your document overview.</p>
+          <div className="w-full max-w-4xl mx-auto flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <h1 className="text-2xl font-semibold text-gradient mb-1">Dashboard</h1>
+              <p className="text-base text-muted-foreground">Welcome back! Here's your document overview.</p>
+            </div>
+            <Link to="/profile" aria-label="Open profile" className="shrink-0">
+              <Avatar className="h-11 w-11 ring-2 ring-primary/20 hover:ring-primary/50 smooth">
+                {avatarUrl && <AvatarImage src={avatarUrl} alt="Profile" />}
+                <AvatarFallback className="bg-primary/10">
+                  <User className="h-5 w-5 text-primary" />
+                </AvatarFallback>
+              </Avatar>
+            </Link>
           </div>
         </header>
 
