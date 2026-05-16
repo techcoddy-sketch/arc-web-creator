@@ -1,4 +1,4 @@
-import { Home, FileText, Camera, User, Vault, ClipboardList } from "lucide-react";
+import { Home, FileText, Camera, Vault, ClipboardList } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -8,7 +8,6 @@ const navigation = [
   { name: "Scan", href: "/scan", icon: Camera },
   { name: "Tasks", href: "/tasks", icon: ClipboardList },
   { name: "DocVault", href: "/docvault", icon: Vault },
-  { name: "Profile", href: "/profile", icon: User },
 ];
 
 export function BottomNavigation() {
@@ -19,7 +18,7 @@ export function BottomNavigation() {
       className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-xl border-t border-border/50 z-50 pb-[env(safe-area-inset-bottom)]"
       style={{ height: 'calc(70px + env(safe-area-inset-bottom))' }}
     >
-      <div className="grid grid-cols-6 w-full h-full py-2 px-1">
+      <div className="grid grid-cols-5 w-full h-full py-2 px-1">
         {navigation.map((item) => {
           const isActive = location.pathname === item.href;
           return (

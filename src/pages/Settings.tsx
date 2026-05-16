@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { InternationalPhoneInput } from "@/components/ui/international-phone-input";
 import { getCountryCode } from "@/utils/countryMapping";
 import { VoiceGreetingToggle } from "@/components/settings/VoiceGreetingToggle";
-import { ThemeToggle } from "@/components/theme/ThemeToggle";
+
 
 interface Profile {
   id: string;
@@ -194,21 +194,7 @@ export default function Settings() {
           </CardContent>
         </Card>
 
-        {/* Appearance */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Appearance</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label>Theme</Label>
-              <ThemeToggle />
-              <p className="text-xs text-muted-foreground">
-                Choose Light, Dark, or follow your device's System setting.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+
 
         {/* App Preferences */}
         <Card>

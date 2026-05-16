@@ -13,6 +13,7 @@ import { exportToCSV, exportToJSON } from "@/utils/exportData";
 import { getSignedUrl } from "@/utils/signedUrl";
 import { AvatarEditPopover } from "@/components/profile/AvatarEditPopover";
 import { EditProfileSheet } from "@/components/profile/EditProfileSheet";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 
 interface Profile {
@@ -259,6 +260,17 @@ export default function Profile() {
           {/* Notification Settings */}
           <SettingsSection title="Notifications">
             <SettingsItem icon={Bell} title="Notification Settings" to="/notification-sound-settings" />
+          </SettingsSection>
+
+          {/* Appearance */}
+          <SettingsSection title="Appearance">
+            <div className="p-4 space-y-3">
+              <p className="text-sm font-medium text-foreground">Theme</p>
+              <ThemeToggle />
+              <p className="text-xs text-muted-foreground">
+                Choose Light, Dark, or follow your device's System setting.
+              </p>
+            </div>
           </SettingsSection>
 
           {/* Support Section */}
