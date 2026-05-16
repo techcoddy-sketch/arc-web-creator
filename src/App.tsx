@@ -166,6 +166,7 @@ const App = () => (
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
+          <ThemePreferenceProvider>
           <TooltipProvider>
             <Toaster />
             <Sonner />
