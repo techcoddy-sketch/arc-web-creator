@@ -209,6 +209,7 @@ const App = () => (
               </Suspense>
             </BrowserRouter>
           </TooltipProvider>
+          </ThemePreferenceProvider>
         </AuthProvider>
       </QueryClientProvider>
     </ThemeProvider>
